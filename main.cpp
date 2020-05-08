@@ -1,15 +1,11 @@
-#include <iostream>
-#include "Classes/Pracownik/Pracownik.h"
+#include "mainwindow.h"
 
+#include <QApplication>
 
-using namespace std;
-
-Pracownik b1;
-Pracownik b2;
-Pracownik b3;
-Pracownik b4;
-
-int main() {
-    b2.odczyt();
-    return 0;
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
 }

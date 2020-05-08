@@ -1,3 +1,0 @@
-C:/Users/Mystry/CLionProjects/Cars/cmake-build-debug/CMakeFiles/Cars.dir
-C:/Users/Mystry/CLionProjects/Cars/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Mystry/CLionProjects/Cars/cmake-build-debug/CMakeFiles/rebuild_cache.dir
