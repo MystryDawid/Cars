@@ -3,52 +3,70 @@
 //
 #include <iostream>
 #include "Pracownik.h"
-#include <fstream>
+#include "QFile"
+
+
 using namespace std;
 
-Pracownik::Pracownik(string imie_,string naziwkos_,int staz){
 
-    id = ++nextID;
-    imie = imie_;
-    nazwisko = naziwkos_;
-    staz_pracy = staz;
-    zapis();
+
+
+Pracownik::Pracownik(QString imie_,QString naziwkos_,int staz){
+
+    this->imie = imie_;
+    this->nazwisko = naziwkos_;
+    this->staz_pracy = staz;
 }
+
 
 Pracownik::Pracownik(){
 
-    id = ++nextID;
-    imie = "Bob";
-    nazwisko = "Budowniczy";
-    staz_pracy = 100;
-    zapis();
+    this->imie = "Bob";
+    this->nazwisko = "Budowniczy";
+    this->staz_pracy = 100;
 }
+
 
 Pracownik::Pracownik(Pracownik *p){
 
-    id = p->id;
-    imie = p->imie;
-    nazwisko = p->nazwisko;
-    staz_pracy = p->staz_pracy;
+    this->imie = p->imie;
+    this->nazwisko = p->nazwisko;
+    this->staz_pracy = p->staz_pracy;
 }
 
 void Pracownik::zapis(){
-    std::string plik = "../Files/" + file_name_pracownik + ".dat";
-    fstream File;
-    File.open(plik, ios::out | ios::binary | ios::app);
-    File.write((char*)this, sizeof(Pracownik));
-    File.close();
+    QString plik = "pracownicy.dat";
+    QFile FileZ(plik);
+    FileZ.open(QIODevice::WriteOnly | QIODevice::Text);
+    FileZ.write((char*)this, sizeof(Pracownik));
+    FileZ.close();
 };
 
 void Pracownik::odczyt(){
-    Pracownik tmp;
-    std::string plik = "../Files/" + file_name_pracownik + ".dat";
-    fstream File;
-    File.open(plik, ios::in | ios::binary);
-    while(File.read((char*)&tmp, sizeof(Pracownik))){
-        cout<<tmp.id<<endl;
+    Pracownik tmp = new Pracownik();
+    QString plik = "pracownicy.dat";
+    QFile FileO(plik);
+    FileO.open(QIODevice::ReadOnly | QIODevice::Text);
+    while(FileO.read((char*)&tmp, sizeof(Pracownik))){
+        cout<<tmp.staz_pracy<<endl;
     }
-    File.close();
+    FileO.close();
 };
 
-int Pracownik::nextID = 0;
+QVector<Pracownik> Pracownik::wszyscy(){
+    QVector<Pracownik> tab;
+    Pracownik tmp;
+    QString plik = "pracownicy.dat";
+    QFile File(plik);
+    if(File.open(QIODevice::ReadOnly | QIODevice::Text)){
+        while(File.read((char*)&tmp, sizeof(Pracownik))){
+            tab.append(tmp);
+        }
+        File.close();
+    }
+    return tab;
+};
+
+
+
+

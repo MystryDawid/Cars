@@ -15,6 +15,29 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_dodajPracownika_clicked();
+
+    void on_usunPracownika_clicked();
+
+    void on_test_clicked();
+
+    void on_goToPracownikForm_clicked();
+
+    void on_goToWybierzAuto_clicked();
+
+    void on_goToDodajCzesci_clicked();
+
+    void on_goToStworzAuto_clicked();
+
+    void on_wroc_clicked();
+
+    void on_wroc_2_clicked();
+
+    void on_wroc_3_clicked();
+
+    void on_wroc_4_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
