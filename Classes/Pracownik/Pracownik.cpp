@@ -32,9 +32,9 @@ Pracownik::Pracownik(Pracownik *p){
 }
 
 void zapisz_pracownikow(){
-    QString plik = "pracownicy.dat";
+    QString plik = "./pracownicy.dat";
     QFile FileZ(plik);
-    FileZ.open(QIODevice::WriteOnly | QIODevice::Text);
+    FileZ.open(QIODevice::WriteOnly);
     for(int i = 0; i < Tabela_Pracownikow.length(); i++){
         FileZ.write((char*)&Tabela_Pracownikow[i], sizeof(Pracownik));
     }
@@ -43,18 +43,17 @@ void zapisz_pracownikow(){
 };
 
 void wczytaj_pracownikow(){
+    QString plik = "./pracownicy.dat";
+    QFile FileZ(plik);
     Pracownik tmp;
     Tabela_Pracownikow.clear();
-    QString plik = "pracownicy.dat";
-    QFile File(plik);
-    if(File.open(QIODevice::ReadOnly | QIODevice::Text)){
-        //while(){
-            //File.read((char*)&tmp, sizeof(Pracownik));
-            std::cout<<tmp.imie.toUtf8().toStdString()<<std::endl;
+    if(FileZ.open(QIODevice::ReadOnly)){
+        while(FileZ.read((char*)&tmp, sizeof(Pracownik))){
             Tabela_Pracownikow.append(tmp);
-        //}
-        File.close();
+        }
     }
+      FileZ.close();
+
 };
 
 
@@ -73,7 +72,7 @@ void MainWindow::on_usunPracownika_clicked()
 void MainWindow::on_test_clicked()
 {
     for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
-        std::cout<<Tabela_Pracownikow.at(i).imie.toUtf8().toStdString()<<std::endl;
+        std::cout<<Tabela_Pracownikow.at(i).staz_pracy<<std::endl;
     }
 }
 
@@ -88,7 +87,7 @@ void MainWindow::on_wczytaj_pracownikow_clicked()
     ui->comboBox->clear();
     ui->comboBox->addItem("XXXXXXXXXXXXXXXXXXXXXXxxx");
     for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
-        ui->comboBox->addItem(Tabela_Pracownikow.at(i).imie);
+        ui->comboBox->addItem("a");
     }
 
 

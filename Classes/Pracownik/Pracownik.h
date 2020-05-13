@@ -4,7 +4,7 @@
 #ifndef CARS_PRACOWNIK_H
 #define CARS_PRACOWNIK_H
 #include "QString"
-#include "QVector"
+
 
 using namespace std;
 
