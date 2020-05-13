@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Classes/Pracownik/Pracownik.cpp \
+    Funkcje_przemieszczjace.cpp \
     main.cpp \
     mainwindow.cpp
 

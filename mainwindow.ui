@@ -44,7 +44,7 @@ background-color:rgb(80, 80, 80);</string>
       <property name="geometry">
        <rect>
         <x>350</x>
-        <y>320</y>
+        <y>260</y>
         <width>181</width>
         <height>121</height>
        </rect>
@@ -82,8 +82,8 @@ background-color:rgb(80, 80, 80);</string>
      <widget class="QPushButton" name="goToDodajCzesci">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>320</y>
+        <x>40</x>
+        <y>260</y>
         <width>181</width>
         <height>121</height>
        </rect>
@@ -189,6 +189,45 @@ background-color:rgb(80, 80, 80);</string>
        <string>Wróć</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="zapisz_zmiany">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>280</y>
+        <width>211</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zapisz zmiany</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="wczytaj_pracownikow">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>380</y>
+        <width>80</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wczytaj</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>300</y>
+        <width>80</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>prac</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="WyborAuta">
      <widget class="QPushButton" name="wroc_2">
@@ -237,17 +276,6 @@ background-color:rgb(80, 80, 80);</string>
     </widget>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>640</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

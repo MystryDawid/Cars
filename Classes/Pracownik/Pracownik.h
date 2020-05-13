@@ -8,26 +8,26 @@
 
 using namespace std;
 
-
-
 class Pracownik{
 
     protected:
         QString file_name_pracownik = "pracownicy";
     public:
-
         int staz_pracy;
         QString imie,nazwisko;
 
         Pracownik(QString imie_,QString naziwkos_,int staz);
         Pracownik();
         Pracownik(Pracownik *p);
-        void zapis();
-        void odczyt();
-        QVector<Pracownik> wszyscy();
+        friend void zapisz_pracownikow();
+        friend void wczytaj_pracownikow();
         void dodaj_do_pracownikow();
 
 };
 
 
+
 #endif //CARS_PRACOWNIK_H
+
+
+

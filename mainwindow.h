@@ -38,6 +38,12 @@ private slots:
 
     void on_wroc_4_clicked();
 
+    void on_zapisz_zmiany_clicked();
+
+    void on_wczytaj_pracownikow_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
