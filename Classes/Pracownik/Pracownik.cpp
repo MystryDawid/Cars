@@ -6,11 +6,14 @@
 #include <iostream>
 #include "Pracownik.h"
 #include "QFile"
+#include "QMessageBox"
 
 
 using namespace std;
 
 QVector<Pracownik> Tabela_Pracownikow;
+
+
 
 Pracownik::Pracownik(QString imie_,QString naziwkos_,int staz){
     this->imie = imie_;
@@ -31,66 +34,91 @@ Pracownik::Pracownik(Pracownik *p){
     this->staz_pracy = p->staz_pracy;
 }
 
-void zapisz_pracownikow(){
+bool zapisz_pracownikow(){
     QString plik = "./pracownicy.dat";
-    QFile FileZ(plik);
-    FileZ.open(QIODevice::WriteOnly);
-    for(int i = 0; i < Tabela_Pracownikow.length(); i++){
-        FileZ.write((char*)&Tabela_Pracownikow[i], sizeof(Pracownik));
+    QFile file(plik);
+    file.open(QIODevice::WriteOnly);
+    QDataStream out(&file);
+    for(int i =0; i < Tabela_Pracownikow.length(); i++){
+         out << Tabela_Pracownikow.at(i).imie << Tabela_Pracownikow.at(i).nazwisko << Tabela_Pracownikow.at(i).staz_pracy;
     }
-    FileZ.close();
+
+    return true;
 
 };
 
-void wczytaj_pracownikow(){
+bool wczytaj_pracownikow(){
     QString plik = "./pracownicy.dat";
-    QFile FileZ(plik);
-    Pracownik tmp;
+    QFile file(plik);
+    file.open(QIODevice::ReadOnly);
+    QDataStream in(&file);
     Tabela_Pracownikow.clear();
-    if(FileZ.open(QIODevice::ReadOnly)){
-        while(FileZ.read((char*)&tmp, sizeof(Pracownik))){
-            Tabela_Pracownikow.append(tmp);
-        }
+    while(!in.atEnd()){
+       Pracownik p = new Pracownik();
+       in >> p.imie >> p.nazwisko >> p.staz_pracy;
+       Tabela_Pracownikow.append(p);
     }
-      FileZ.close();
-
+    return true;
 };
 
 
 void MainWindow::on_dodajPracownika_clicked()
 {
-    Tabela_Pracownikow.append(Pracownik(ui->imie->text(),ui->nazwisko->text(),ui->staz->value()));
-    ui->comboBox->addItem(Tabela_Pracownikow.last().imie);
+    QMessageBox msgBox;
+    if(!ui->imie->text().isEmpty() && !ui->nazwisko->text().isEmpty() && !ui->staz->text().isEmpty()){
+        Tabela_Pracownikow.append(Pracownik(ui->imie->text(),ui->nazwisko->text(),ui->staz->value()));
+        ui->comboBox->addItem(Tabela_Pracownikow.last().imie);
+        msgBox.setText("Dodano pracownika.");
+    }else{
+        msgBox.setText("Proszę wypełnić wszystkie pola.");
+    }
+    msgBox.exec();
 }
 
 void MainWindow::on_usunPracownika_clicked()
 {
-    Tabela_Pracownikow.remove(ui->comboBox->currentIndex());
-    ui->comboBox->removeItem(ui->comboBox->currentIndex());
+    QMessageBox msgBox;
+    if(ui->comboBox->count()){
+        Tabela_Pracownikow.remove(ui->comboBox->currentIndex());
+        ui->comboBox->removeItem(ui->comboBox->currentIndex());
+        msgBox.setText("Usunięto pracownika.");
+    }else{
+        msgBox.setText("Usunięcie pracownika nie powiodło się.");
+    }
+    msgBox.exec();
 }
 
 void MainWindow::on_test_clicked()
 {
     for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
-        std::cout<<Tabela_Pracownikow.at(i).staz_pracy<<std::endl;
+        std::cout<<Tabela_Pracownikow.at(i).imie.toUtf8().toStdString()<<std::endl;
     }
 }
 
 void MainWindow::on_zapisz_zmiany_clicked()
 {
-    zapisz_pracownikow();
+    QMessageBox msgBox;
+    if(zapisz_pracownikow()){
+        msgBox.setText("Zapisano pracowników.");
+    }else{
+        msgBox.setText("Nie zapisano pracowników.");
+    }
+    msgBox.exec();
 }
 
 void MainWindow::on_wczytaj_pracownikow_clicked()
 {
-    wczytaj_pracownikow();
-    ui->comboBox->clear();
-    ui->comboBox->addItem("XXXXXXXXXXXXXXXXXXXXXXxxx");
-    for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
-        ui->comboBox->addItem("a");
+    QMessageBox msgBox;
+    if(wczytaj_pracownikow()){
+        msgBox.setText("Wczytano pracowników.");
+    }else{
+        msgBox.setText("Nie wczytano pracowników.");
     }
-
-
+    ui->comboBox->clear();
+    for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
+        ui->comboBox->addItem(Tabela_Pracownikow.at(i).imie);
+    }
+    msgBox.exec();
 }
 
 void MainWindow::on_pushButton_clicked()

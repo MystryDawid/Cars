@@ -19,8 +19,8 @@ class Pracownik{
         Pracownik(QString imie_,QString naziwkos_,int staz);
         Pracownik();
         Pracownik(Pracownik *p);
-        friend void zapisz_pracownikow();
-        friend void wczytaj_pracownikow();
+        friend bool zapisz_pracownikow();
+        friend bool wczytaj_pracownikow();
         void dodaj_do_pracownikow();
 
 };
