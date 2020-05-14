@@ -67,7 +67,7 @@ void MainWindow::on_dodajPracownika_clicked()
     QMessageBox msgBox;
     if(!ui->imie->text().isEmpty() && !ui->nazwisko->text().isEmpty() && !ui->staz->text().isEmpty()){
         Tabela_Pracownikow.append(Pracownik(ui->imie->text(),ui->nazwisko->text(),ui->staz->value()));
-        ui->comboBox->addItem(Tabela_Pracownikow.last().imie);
+        ui->listaPracownikow->addItem(Tabela_Pracownikow.last().imie);
         msgBox.setText("Dodano pracownika.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -78,21 +78,14 @@ void MainWindow::on_dodajPracownika_clicked()
 void MainWindow::on_usunPracownika_clicked()
 {
     QMessageBox msgBox;
-    if(ui->comboBox->count()){
-        Tabela_Pracownikow.remove(ui->comboBox->currentIndex());
-        ui->comboBox->removeItem(ui->comboBox->currentIndex());
+    if(ui->listaPracownikow->count()){
+        Tabela_Pracownikow.remove(ui->listaPracownikow->currentIndex().row());
+        ui->listaPracownikow->takeItem(ui->listaPracownikow->currentRow());
         msgBox.setText("Usunięto pracownika.");
     }else{
         msgBox.setText("Usunięcie pracownika nie powiodło się.");
     }
     msgBox.exec();
-}
-
-void MainWindow::on_test_clicked()
-{
-    for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
-        std::cout<<Tabela_Pracownikow.at(i).imie.toUtf8().toStdString()<<std::endl;
-    }
 }
 
 void MainWindow::on_zapisz_zmiany_clicked()
@@ -110,35 +103,36 @@ void MainWindow::on_wczytaj_pracownikow_clicked()
 {
     QMessageBox msgBox;
     if(wczytaj_pracownikow()){
+        ui->listaPracownikow->clear();
+        for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
+            ui->listaPracownikow->addItem(Tabela_Pracownikow.at(i).imie);
+        }
         msgBox.setText("Wczytano pracowników.");
     }else{
         msgBox.setText("Nie wczytano pracowników.");
     }
-    ui->comboBox->clear();
-    for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
-        ui->comboBox->addItem(Tabela_Pracownikow.at(i).imie);
-    }
     msgBox.exec();
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_listaPracownikow_clicked()
 {
-    Tabela_Pracownikow.append(Pracownik("Adam","o",1));
-    Tabela_Pracownikow.append(Pracownik("Adamm","o",1));
-    Tabela_Pracownikow.append(Pracownik("Adammm","o",1));
-    Tabela_Pracownikow.append(Pracownik("Adammmm","o",1));
-    Tabela_Pracownikow.append(Pracownik("Adammmmm","o",1));
-    Tabela_Pracownikow.append(Pracownik("Adammmmmm","o",1));
-    Tabela_Pracownikow.append(Pracownik("Ada","o",1));
-
-
-    for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
-        ui->comboBox->addItem(Tabela_Pracownikow.at(i).imie);
-    }
+   Pracownik tmp = new Pracownik(Tabela_Pracownikow.at(ui->listaPracownikow->currentIndex().row()));
+   ui->imie->setText(tmp.imie);
+   ui->nazwisko->setText(tmp.nazwisko);
+   ui->staz->setValue(tmp.staz_pracy);
 }
 
-
-
-
-
-
+void MainWindow::on_modyfikuj_clicked()
+{
+    QMessageBox msgBox;
+    if(!ui->imie->text().isEmpty() && !ui->nazwisko->text().isEmpty() && !ui->staz->text().isEmpty()){
+        QString imie = ui->imie->text();
+        ui->listaPracownikow->currentItem()->setText(imie);
+        Tabela_Pracownikow.replace(ui->listaPracownikow->currentRow(),
+                                   new Pracownik(imie,ui->nazwisko->text(),ui->staz->value()));
+        msgBox.setText("Zmodyfikowano pracownika.");
+    }else{
+        msgBox.setText("Proszę wybrać pracowanikaz listy po lewej.");
+    }
+    msgBox.exec();
+}

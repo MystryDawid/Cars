@@ -20,8 +20,6 @@ private slots:
 
     void on_usunPracownika_clicked();
 
-    void on_test_clicked();
-
     void on_goToPracownikForm_clicked();
 
     void on_goToWybierzAuto_clicked();
@@ -42,7 +40,9 @@ private slots:
 
     void on_wczytaj_pracownikow_clicked();
 
-    void on_pushButton_clicked();
+    void on_listaPracownikow_clicked();
+
+    void on_modyfikuj_clicked();
 
 private:
     Ui::MainWindow *ui;

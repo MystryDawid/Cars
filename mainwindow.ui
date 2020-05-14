@@ -10,6 +10,12 @@
     <height>480</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>640</width>
+    <height>480</height>
+   </size>
+  </property>
   <property name="maximumSize">
    <size>
     <width>640</width>
@@ -29,14 +35,32 @@
       <height>480</height>
      </rect>
     </property>
+    <property name="minimumSize">
+     <size>
+      <width>640</width>
+      <height>480</height>
+     </size>
+    </property>
     <property name="maximumSize">
      <size>
       <width>640</width>
       <height>480</height>
      </size>
     </property>
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">QWidget{
+     <string notr="true">kolory{
+yellow: #fcee09;
+black: #050a0e;
+blue: #00f0ff;
+red: #ff003c;
+}
+
+QWidget{
 background-color:#fcee09;
 color: #050a0e;
 }
@@ -48,8 +72,13 @@ QLineEdit{
 QSpinBox{
  border: 2px solid #ff003c;
 }
+QLabel{
+   font-size: 15px;
+}
 
-
+wroc{
+background-color:#00f0ff;
+}
 
 
 QPushButton{
@@ -59,24 +88,27 @@ QPushButton{
   color: #050a0e;
   padding: 20px 25px;
   position: relative;
-  font-size: .85rem;
+  font-size:15px;
   text-transform: uppercase;
 }
 
 QPushButton:hover{
-  background-color:  #ff003c;
+  background-color:  #00f0ff;
 }
 
-</string>
+QListWidget{
+ border: 2px solid #ff003c;
+ color: #050a0e;
+}</string>
     </property>
     <widget class="QWidget" name="Main">
      <widget class="QPushButton" name="goToPracownikForm">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>260</y>
-        <width>186</width>
-        <height>121</height>
+        <x>380</x>
+        <y>290</y>
+        <width>231</width>
+        <height>161</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -90,10 +122,10 @@ QPushButton:hover{
      <widget class="QPushButton" name="goToWybierzAuto">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>90</y>
-        <width>181</width>
-        <height>121</height>
+        <x>30</x>
+        <y>30</y>
+        <width>221</width>
+        <height>161</height>
        </rect>
       </property>
       <property name="text">
@@ -103,10 +135,10 @@ QPushButton:hover{
      <widget class="QPushButton" name="goToStworzAuto">
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>90</y>
-        <width>181</width>
-        <height>121</height>
+        <x>380</x>
+        <y>30</y>
+        <width>231</width>
+        <height>161</height>
        </rect>
       </property>
       <property name="text">
@@ -116,10 +148,10 @@ QPushButton:hover{
      <widget class="QPushButton" name="goToDodajCzesci">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>260</y>
-        <width>181</width>
-        <height>121</height>
+        <x>30</x>
+        <y>290</y>
+        <width>221</width>
+        <height>161</height>
        </rect>
       </property>
       <property name="text">
@@ -131,39 +163,23 @@ QPushButton:hover{
      <widget class="QPushButton" name="usunPracownika">
       <property name="geometry">
        <rect>
-        <x>100</x>
-        <y>170</y>
-        <width>91</width>
-        <height>21</height>
+        <x>250</x>
+        <y>280</y>
+        <width>141</width>
+        <height>101</height>
        </rect>
       </property>
       <property name="text">
        <string>Usun</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="test">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>240</y>
-        <width>80</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>test</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="dodajPracownika">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>210</y>
-        <width>91</width>
-        <height>21</height>
+        <x>250</x>
+        <y>40</y>
+        <width>141</width>
+        <height>101</height>
        </rect>
       </property>
       <property name="text">
@@ -173,10 +189,10 @@ QPushButton:hover{
      <widget class="QSpinBox" name="staz">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>160</y>
-        <width>81</width>
-        <height>31</height>
+        <x>410</x>
+        <y>280</y>
+        <width>221</width>
+        <height>40</height>
        </rect>
       </property>
       <property name="wrapping">
@@ -198,41 +214,36 @@ QPushButton:hover{
      <widget class="QLineEdit" name="nazwisko">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>90</y>
-        <width>113</width>
-        <height>21</height>
+        <x>410</x>
+        <y>160</y>
+        <width>221</width>
+        <height>40</height>
        </rect>
       </property>
      </widget>
      <widget class="QLineEdit" name="imie">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>120</y>
-        <width>113</width>
-        <height>21</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>90</y>
-        <width>181</width>
-        <height>31</height>
+        <x>410</x>
+        <y>40</y>
+        <width>221</width>
+        <height>41</height>
        </rect>
       </property>
      </widget>
      <widget class="QPushButton" name="wroc">
       <property name="geometry">
        <rect>
-        <x>29</x>
-        <y>350</y>
-        <width>101</width>
-        <height>31</height>
+        <x>10</x>
+        <y>410</y>
+        <width>131</width>
+        <height>61</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">:hover{
+background-color:#ff003c;
+}</string>
       </property>
       <property name="text">
        <string>Wróć</string>
@@ -241,10 +252,10 @@ QPushButton:hover{
      <widget class="QPushButton" name="zapisz_zmiany">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>280</y>
-        <width>211</width>
-        <height>91</height>
+        <x>170</x>
+        <y>400</y>
+        <width>171</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="text">
@@ -254,27 +265,98 @@ QPushButton:hover{
      <widget class="QPushButton" name="wczytaj_pracownikow">
       <property name="geometry">
        <rect>
-        <x>329</x>
-        <y>380</y>
-        <width>111</width>
+        <x>350</x>
+        <y>400</y>
+        <width>281</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wczytaj listę pracowników</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>100</y>
+        <width>221</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Imie</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>220</y>
+        <width>221</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Nazwisko</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>340</y>
+        <width>221</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Staż pracy</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>181</width>
         <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Wczytaj</string>
+       <string>Lista pracowników</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QListWidget" name="listaPracownikow">
       <property name="geometry">
        <rect>
-        <x>119</x>
-        <y>290</y>
-        <width>91</width>
-        <height>31</height>
+        <x>10</x>
+        <y>41</y>
+        <width>221</width>
+        <height>341</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="modyfikuj">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>160</y>
+        <width>141</width>
+        <height>101</height>
        </rect>
       </property>
       <property name="text">
-       <string>prac</string>
+       <string>Modyfikuj</string>
       </property>
      </widget>
     </widget>
@@ -282,10 +364,10 @@ QPushButton:hover{
      <widget class="QPushButton" name="wroc_2">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>390</y>
-        <width>91</width>
-        <height>31</height>
+        <x>10</x>
+        <y>410</y>
+        <width>131</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
@@ -297,10 +379,10 @@ QPushButton:hover{
      <widget class="QPushButton" name="wroc_3">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>380</y>
-        <width>91</width>
-        <height>31</height>
+        <x>10</x>
+        <y>410</y>
+        <width>131</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
@@ -312,10 +394,10 @@ QPushButton:hover{
      <widget class="QPushButton" name="wroc_4">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>380</y>
-        <width>91</width>
-        <height>31</height>
+        <x>10</x>
+        <y>410</y>
+        <width>131</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
