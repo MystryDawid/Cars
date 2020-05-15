@@ -10,8 +10,6 @@ using namespace std;
 
 class Pracownik{
 
-    protected:
-        QString file_name_pracownik = "pracownicy";
     public:
         int staz_pracy;
         QString imie,nazwisko;
@@ -19,10 +17,9 @@ class Pracownik{
         Pracownik(QString imie_,QString naziwkos_,int staz);
         Pracownik();
         Pracownik(Pracownik *p);
+
         friend bool zapisz_pracownikow();
         friend bool wczytaj_pracownikow();
-        void dodaj_do_pracownikow();
-
 };
 
 

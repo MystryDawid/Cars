@@ -72,7 +72,7 @@ color: #00f0ff;
 font-size:15px;;
 }
 
-QSpinBox{
+QSpinBox, QDoubleSpinBox{
  border: 2px solid #050a0e;
 }
 QLabel{
@@ -290,7 +290,7 @@ background-color:#ff003c;
        </rect>
       </property>
       <property name="text">
-       <string>Imie</string>
+       <string>IMIE</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -306,7 +306,7 @@ background-color:#ff003c;
        </rect>
       </property>
       <property name="text">
-       <string>Nazwisko</string>
+       <string>NAZWISKO</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -322,7 +322,7 @@ background-color:#ff003c;
        </rect>
       </property>
       <property name="text">
-       <string>Staż pracy</string>
+       <string>STAŻ PRACY</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -338,7 +338,7 @@ background-color:#ff003c;
        </rect>
       </property>
       <property name="text">
-       <string>Lista pracowników</string>
+       <string>LISTA PRACOWNIKÓW</string>
       </property>
      </widget>
      <widget class="QListWidget" name="listaPracownikow">
@@ -422,6 +422,19 @@ color:red;
        <string>Wróć</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="typy_karoserii_button">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>131</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Karoserie</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="StworzAuto">
      <widget class="QPushButton" name="wroc_4">
@@ -437,6 +450,230 @@ color:red;
        <string>Wróć</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QWidget" name="typy_karoserii">
+     <widget class="QPushButton" name="wroc_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>400</y>
+        <width>131</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wróć</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="dodajTypKaroserii">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>40</y>
+        <width>101</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="modyfikujTypKaroserii">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>160</y>
+        <width>101</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Modyfikuj</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="usunTypKaroserii">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>280</y>
+        <width>101</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Usuń</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>291</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>KAROSERIE</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="listaTypyKaroserii">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>291</width>
+        <height>341</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">scrollArea{
+color:red;
+}</string>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
+      <property name="uniformItemSizes">
+       <bool>false</bool>
+      </property>
+      <property name="wordWrap">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="wczytajTypyKaroserii">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>400</y>
+        <width>301</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wczytaj typy karoserii</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="zapiszZamianyKaroserii">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>400</y>
+        <width>171</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zapisz zmiany</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="typTypKaroserii">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>40</y>
+        <width>191</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>80</y>
+        <width>191</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TYP</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="material">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>140</y>
+        <width>191</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>180</y>
+        <width>191</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>MATERIAŁ</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="masa">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>240</y>
+        <width>191</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="maximum">
+       <double>9999.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>280</y>
+        <width>191</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>MATERIAŁ</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <zorder>wroc_5</zorder>
+     <zorder>dodajTypKaroserii</zorder>
+     <zorder>modyfikujTypKaroserii</zorder>
+     <zorder>usunTypKaroserii</zorder>
+     <zorder>label_5</zorder>
+     <zorder>listaTypyKaroserii</zorder>
+     <zorder>wczytajTypyKaroserii</zorder>
+     <zorder>zapiszZamianyKaroserii</zorder>
+     <zorder>label_7</zorder>
+     <zorder>typTypKaroserii</zorder>
+     <zorder>label_8</zorder>
+     <zorder>material</zorder>
+     <zorder>label_9</zorder>
+     <zorder>masa</zorder>
     </widget>
    </widget>
   </widget>

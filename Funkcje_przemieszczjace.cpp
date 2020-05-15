@@ -21,6 +21,11 @@ void MainWindow::on_wroc_4_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
+
+void MainWindow::on_wroc_5_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
 ///koniec wróć
 
 
@@ -44,4 +49,10 @@ void MainWindow::on_goToStworzAuto_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
 }
+
+void MainWindow::on_typy_karoserii_button_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
 /// koniec idz do

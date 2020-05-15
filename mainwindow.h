@@ -44,6 +44,22 @@ private slots:
 
     void on_modyfikuj_clicked();
 
+    void on_typy_karoserii_button_clicked();
+
+    void on_wroc_5_clicked();
+
+    void on_dodajTypKaroserii_clicked();
+
+    void on_usunTypKaroserii_clicked();
+
+    void on_wczytajTypyKaroserii_clicked();
+
+    void on_zapiszZamianyKaroserii_clicked();
+
+    void on_listaTypyKaroserii_clicked();
+
+    void on_modyfikujTypKaroserii_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

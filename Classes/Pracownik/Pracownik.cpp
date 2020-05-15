@@ -3,10 +3,10 @@
 //
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <iostream>
 #include "Pracownik.h"
 #include "QFile"
 #include "QMessageBox"
+#include "iostream"
 
 
 using namespace std;
@@ -35,11 +35,12 @@ Pracownik::Pracownik(Pracownik *p){
 }
 
 bool zapisz_pracownikow(){
+    if(Tabela_Pracownikow.length()) return 0;
     QString plik = "./pracownicy.dat";
     QFile file(plik);
     file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
-    for(int i =0; i < Tabela_Pracownikow.length(); i++){
+    for(int i = 0; i < Tabela_Pracownikow.length(); i++){
          out << Tabela_Pracownikow.at(i).imie << Tabela_Pracownikow.at(i).nazwisko << Tabela_Pracownikow.at(i).staz_pracy;
     }
 
@@ -78,9 +79,10 @@ void MainWindow::on_dodajPracownika_clicked()
 void MainWindow::on_usunPracownika_clicked()
 {
     QMessageBox msgBox;
-    if(ui->listaPracownikow->count()){
-        Tabela_Pracownikow.remove(ui->listaPracownikow->currentIndex().row());
-        ui->listaPracownikow->takeItem(ui->listaPracownikow->currentRow());
+    int row =  ui->listaPracownikow->currentRow();
+    if(ui->listaPracownikow->count() && row != -1){
+        Tabela_Pracownikow.remove(row);
+        ui->listaPracownikow->takeItem(row);
         msgBox.setText("Usunięto pracownika.");
     }else{
         msgBox.setText("Usunięcie pracownika nie powiodło się.");
@@ -132,7 +134,7 @@ void MainWindow::on_modyfikuj_clicked()
                                    new Pracownik(imie,ui->nazwisko->text(),ui->staz->value()));
         msgBox.setText("Zmodyfikowano pracownika.");
     }else{
-        msgBox.setText("Proszę wybrać pracowanikaz listy po lewej.");
+        msgBox.setText("Proszę wybrać pracowanika z listy po lewej.");
     }
     msgBox.exec();
 }
