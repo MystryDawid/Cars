@@ -24,8 +24,14 @@ void MainWindow::on_wroc_4_clicked()
 
 void MainWindow::on_wroc_5_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(3);
 }
+
+void MainWindow::on_wroc_6_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
+
 ///koniec wróć
 
 
@@ -53,6 +59,11 @@ void MainWindow::on_goToStworzAuto_clicked()
 void MainWindow::on_typy_karoserii_button_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+}
+
+void MainWindow::on_naped_button_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
 }
 
 /// koniec idz do

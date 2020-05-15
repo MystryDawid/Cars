@@ -3,17 +3,14 @@
 //
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "Pracownik.h"
+#include "pracownik.h"
 #include "QFile"
 #include "QMessageBox"
 #include "iostream"
 
-
 using namespace std;
 
 QVector<Pracownik> Tabela_Pracownikow;
-
-
 
 Pracownik::Pracownik(QString imie_,QString naziwkos_,int staz){
     this->imie = imie_;
@@ -35,15 +32,17 @@ Pracownik::Pracownik(Pracownik *p){
 }
 
 bool zapisz_pracownikow(){
-    if(Tabela_Pracownikow.length()) return 0;
+    if(Tabela_Pracownikow.isEmpty()) return 0;
     QString plik = "./pracownicy.dat";
     QFile file(plik);
     file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
     for(int i = 0; i < Tabela_Pracownikow.length(); i++){
-         out << Tabela_Pracownikow.at(i).imie << Tabela_Pracownikow.at(i).nazwisko << Tabela_Pracownikow.at(i).staz_pracy;
+         out << Tabela_Pracownikow.at(i).imie <<
+                Tabela_Pracownikow.at(i).nazwisko <<
+                Tabela_Pracownikow.at(i).staz_pracy;
     }
-
+    file.close();
     return true;
 
 };
@@ -59,6 +58,7 @@ bool wczytaj_pracownikow(){
        in >> p.imie >> p.nazwisko >> p.staz_pracy;
        Tabela_Pracownikow.append(p);
     }
+    file.close();
     return true;
 };
 
@@ -66,8 +66,12 @@ bool wczytaj_pracownikow(){
 void MainWindow::on_dodajPracownika_clicked()
 {
     QMessageBox msgBox;
-    if(!ui->imie->text().isEmpty() && !ui->nazwisko->text().isEmpty() && !ui->staz->text().isEmpty()){
-        Tabela_Pracownikow.append(Pracownik(ui->imie->text(),ui->nazwisko->text(),ui->staz->value()));
+    if(!ui->imie->text().isEmpty() && !ui->nazwisko->text().isEmpty()
+            && !ui->staz->text().isEmpty()){
+        Tabela_Pracownikow.append(
+                    Pracownik(ui->imie->text(),
+                              ui->nazwisko->text(),
+                              ui->staz->value()));
         ui->listaPracownikow->addItem(Tabela_Pracownikow.last().imie);
         msgBox.setText("Dodano pracownika.");
     }else{
@@ -118,7 +122,8 @@ void MainWindow::on_wczytaj_pracownikow_clicked()
 
 void MainWindow::on_listaPracownikow_clicked()
 {
-   Pracownik tmp = new Pracownik(Tabela_Pracownikow.at(ui->listaPracownikow->currentIndex().row()));
+   Pracownik tmp = new Pracownik(
+               Tabela_Pracownikow.at(ui->listaPracownikow->currentIndex().row()));
    ui->imie->setText(tmp.imie);
    ui->nazwisko->setText(tmp.nazwisko);
    ui->staz->setValue(tmp.staz_pracy);
@@ -127,11 +132,14 @@ void MainWindow::on_listaPracownikow_clicked()
 void MainWindow::on_modyfikuj_clicked()
 {
     QMessageBox msgBox;
-    if(!ui->imie->text().isEmpty() && !ui->nazwisko->text().isEmpty() && !ui->staz->text().isEmpty()){
+    if(!ui->imie->text().isEmpty() && !ui->nazwisko->text().isEmpty()
+            && !ui->staz->text().isEmpty()){
         QString imie = ui->imie->text();
         ui->listaPracownikow->currentItem()->setText(imie);
         Tabela_Pracownikow.replace(ui->listaPracownikow->currentRow(),
-                                   new Pracownik(imie,ui->nazwisko->text(),ui->staz->value()));
+                                   new Pracownik(imie,
+                                                 ui->nazwisko->text(),
+                                                 ui->staz->value()));
         msgBox.setText("Zmodyfikowano pracownika.");
     }else{
         msgBox.setText("Proszę wybrać pracowanika z listy po lewej.");

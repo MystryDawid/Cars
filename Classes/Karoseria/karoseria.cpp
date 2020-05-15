@@ -25,7 +25,7 @@ Karoseria::Karoseria(Karoseria *k){
 }
 
 bool zapisz_typy_karoserii(){
-    if(Tabela_Karoseria.length()) return 0;
+    if(Tabela_Karoseria.isEmpty()) return 0;
     QString plik = "./karoserie.dat";
     QFile file(plik);
     file.open(QIODevice::WriteOnly);
@@ -33,6 +33,7 @@ bool zapisz_typy_karoserii(){
     for(int i = 0; i < Tabela_Karoseria.length(); i++){
          out << Tabela_Karoseria.at(i).typ << Tabela_Karoseria.at(i).material << Tabela_Karoseria.at(i).masa;
     }
+    file.close();
     return true;
 
 };
@@ -48,6 +49,7 @@ bool wczytaj_typy_karoserii(){
        in >> k.typ >> k.material >> k.masa;
        Tabela_Karoseria.append(k);
     }
+    file.close();
     return true;
 };
 

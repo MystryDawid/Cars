@@ -16,15 +16,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Classes/Karoseria/Karoseria.cpp \
+    Classes/Karoseria/karoseria.cpp \
+    Classes/Naped/naped.cpp \
     Classes/Pracownik/Pracownik.cpp \
     Funkcje_przemieszczjace.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
-    Classes/Karoseria/Karoseria.h \
-    Classes/Pracownik/Pracownik.h \
+    Classes/Karoseria/karoseria.h \
+    Classes/Naped/naped.h \
+    Classes/Pracownik/pracownik.h \
     mainwindow.h
 
 FORMS += \
@@ -44,5 +46,6 @@ DISTFILES += \
     .idea/workspace.xml
 
 SUBDIRS += \
+    Factory.pro \
     Factory.pro \
     Factory.pro

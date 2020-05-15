@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "Classes/Pracownik/Pracownik.h"
+#include "Classes/Pracownik/pracownik.h"
 #include "QString"
 #include <iostream>
 #include "QFile"
@@ -15,14 +15,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 }
 
-
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-
-
-
 
 

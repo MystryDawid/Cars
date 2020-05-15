@@ -60,6 +60,26 @@ private slots:
 
     void on_modyfikujTypKaroserii_clicked();
 
+    void on_wroc_6_clicked();
+
+    void on_naped_button_clicked();
+
+    void on_wartoscPrzod_valueChanged(int value);
+
+    void on_wartoscTyl_valueChanged(int value);
+
+    void on_dodajNaped_clicked();
+
+    void on_usunNaped_clicked();
+
+    void on_zapiszNaped_clicked();
+
+    void on_wczytajNaped_clicked();
+
+    void on_listaNaped_clicked();
+
+    void on_modyfikujNaped_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
