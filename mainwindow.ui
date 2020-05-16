@@ -101,7 +101,6 @@ wroc{
 background-color:#00f0ff;
 }
 
-
 QPushButton{
   border: 2px solid #050a0e;
   background-color:  #fcee09;
@@ -484,7 +483,7 @@ color:red;
        </rect>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>KOŁA</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_3">
@@ -891,7 +890,7 @@ color:red;
      <widget class="QSlider" name="wartoscPrzod">
       <property name="geometry">
        <rect>
-        <x>430</x>
+        <x>420</x>
         <y>130</y>
         <width>71</width>
         <height>171</height>
@@ -907,7 +906,7 @@ color:red;
      <widget class="QSlider" name="wartoscTyl">
       <property name="geometry">
        <rect>
-        <x>550</x>
+        <x>540</x>
         <y>130</y>
         <width>71</width>
         <height>171</height>
@@ -923,7 +922,7 @@ color:red;
      <widget class="QLabel" name="label_11">
       <property name="geometry">
        <rect>
-        <x>430</x>
+        <x>420</x>
         <y>350</y>
         <width>71</width>
         <height>40</height>
@@ -939,7 +938,7 @@ color:red;
      <widget class="QLabel" name="label_12">
       <property name="geometry">
        <rect>
-        <x>550</x>
+        <x>540</x>
         <y>350</y>
         <width>71</width>
         <height>40</height>
@@ -955,7 +954,7 @@ color:red;
      <widget class="QLCDNumber" name="lcdNumberPrzod">
       <property name="geometry">
        <rect>
-        <x>430</x>
+        <x>420</x>
         <y>310</y>
         <width>71</width>
         <height>41</height>
@@ -989,7 +988,7 @@ color:red;
      <widget class="QLCDNumber" name="lcdNumberTyl">
       <property name="geometry">
        <rect>
-        <x>550</x>
+        <x>540</x>
         <y>310</y>
         <width>71</width>
         <height>41</height>
@@ -1027,6 +1026,231 @@ color:red;
      <zorder>lcdNumberTyl</zorder>
      <zorder>wartoscTyl</zorder>
      <zorder>wartoscPrzod</zorder>
+    </widget>
+    <widget class="QWidget" name="kola">
+     <widget class="QPushButton" name="wroc_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>400</y>
+        <width>131</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wróć</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="zapisz_kola">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>400</y>
+        <width>171</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zapisz zmiany</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="wczytajKola">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>400</y>
+        <width>301</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wczytaj typy karoserii</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="listaKol">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>221</width>
+        <height>341</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">scrollArea{
+color:red;
+}</string>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
+      <property name="uniformItemSizes">
+       <bool>false</bool>
+      </property>
+      <property name="wordWrap">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>221</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>KOŁA</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="dodajKola">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>40</y>
+        <width>141</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="modyfikujKola">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>160</y>
+        <width>141</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>MODYFIKUJ</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="usunKola">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>280</y>
+        <width>141</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>USUŃ</string>
+      </property>
+     </widget>
+     <widget class="QLCDNumber" name="lcdNumberKoloWielkosc">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>300</y>
+        <width>151</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="midLineWidth">
+       <number>0</number>
+      </property>
+      <property name="smallDecimalPoint">
+       <bool>false</bool>
+      </property>
+      <property name="digitCount">
+       <number>3</number>
+      </property>
+      <property name="segmentStyle">
+       <enum>QLCDNumber::Flat</enum>
+      </property>
+      <property name="intValue" stdset="0">
+       <number>0</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>360</y>
+        <width>151</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>WIELKOŚĆ</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QSlider" name="wielkoscKola">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>130</y>
+        <width>151</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="KoloMaterial">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>40</y>
+        <width>221</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>80</y>
+        <width>221</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>MATERIAŁ</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <zorder>wroc_7</zorder>
+     <zorder>zapisz_kola</zorder>
+     <zorder>wczytajKola</zorder>
+     <zorder>listaKol</zorder>
+     <zorder>label_13</zorder>
+     <zorder>dodajKola</zorder>
+     <zorder>modyfikujKola</zorder>
+     <zorder>usunKola</zorder>
+     <zorder>lcdNumberKoloWielkosc</zorder>
+     <zorder>label_14</zorder>
+     <zorder>wielkoscKola</zorder>
+     <zorder>label_15</zorder>
+     <zorder>KoloMaterial</zorder>
     </widget>
    </widget>
   </widget>

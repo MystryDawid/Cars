@@ -2,8 +2,6 @@
 #define KAROSERIA_H
 #include "QString"
 
-/// stal, aluminium,Włókno węglowe,Kevlar,Tytan
-/// drukowanie, formowanie;
 
 class Karoseria{
 

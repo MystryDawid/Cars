@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Classes/Karoseria/karoseria.cpp \
+    Classes/Kola/kola.cpp \
     Classes/Naped/naped.cpp \
     Classes/Pracownik/Pracownik.cpp \
     Funkcje_przemieszczjace.cpp \
@@ -25,6 +26,8 @@ SOURCES += \
 
 HEADERS += \
     Classes/Karoseria/karoseria.h \
+    Classes/Karoseria/kola.h \
+    Classes/Kola/kola.h \
     Classes/Naped/naped.h \
     Classes/Pracownik/pracownik.h \
     mainwindow.h
@@ -46,6 +49,7 @@ DISTFILES += \
     .idea/workspace.xml
 
 SUBDIRS += \
+    Factory.pro \
     Factory.pro \
     Factory.pro \
     Factory.pro

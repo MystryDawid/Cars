@@ -65,7 +65,9 @@ void MainWindow::on_dodajNaped_clicked()
         Tabela_Naped.append(Naped(ui->napedNaped->text(),
                                   ui->wartoscPrzod->value(),
                                   ui->wartoscTyl->value()));
-        ui->listaNaped->addItem(Tabela_Naped.last().naped);
+        ui->listaNaped->addItem(Tabela_Naped.last().naped + " " +
+                                QString::number(Tabela_Naped.last().przod) + " " +
+                                QString::number(Tabela_Naped.last().tyl));
         msgBox.setText("Dodano napęd.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -77,7 +79,7 @@ void MainWindow::on_usunNaped_clicked()
 {
     QMessageBox msgBox;
     int row =  ui->listaNaped->currentRow();
-    if(ui->listaNaped->count() && row != -1){
+    if(row != -1){
         Tabela_Naped.remove(row);
         ui->listaNaped->takeItem(row);
         msgBox.setText("Usunięto napęd.");
@@ -104,7 +106,9 @@ void MainWindow::on_wczytajNaped_clicked()
     if(wczytaj_naped()){
         ui->listaNaped->clear();
         for (int i = 0;i < Tabela_Naped.length(); i++) {
-            ui->listaNaped->addItem(Tabela_Naped.at(i).naped);
+            ui->listaNaped->addItem(Tabela_Naped.at(i).naped + " " +
+                                    QString::number(Tabela_Naped.at(i).przod) + " " +
+                                    QString::number(Tabela_Naped.at(i).tyl));
         }
         msgBox.setText("Wczytano napędy.");
     }else{
@@ -125,7 +129,9 @@ void MainWindow::on_modyfikujNaped_clicked()
 {
     QMessageBox msgBox;
     if(!ui->napedNaped->text().isEmpty()){
-        ui->listaNaped->currentItem()->setText(ui->napedNaped->text());
+        ui->listaNaped->currentItem()->setText(ui->napedNaped->text() + " " +
+                                               QString::number(ui->wartoscPrzod->value()) + " " +
+                                               QString::number(ui->wartoscTyl->value()));
         Tabela_Naped.replace(ui->listaNaped->currentRow(),
                                    new Naped(ui->napedNaped->text(),
                                              ui->wartoscPrzod->value(),

@@ -24,6 +24,7 @@ Karoseria::Karoseria(Karoseria *k){
     this->material = k->material;
 }
 
+
 bool zapisz_typy_karoserii(){
     if(Tabela_Karoseria.isEmpty()) return 0;
     QString plik = "./karoserie.dat";
@@ -31,7 +32,9 @@ bool zapisz_typy_karoserii(){
     file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
     for(int i = 0; i < Tabela_Karoseria.length(); i++){
-         out << Tabela_Karoseria.at(i).typ << Tabela_Karoseria.at(i).material << Tabela_Karoseria.at(i).masa;
+         out << Tabela_Karoseria.at(i).typ <<
+                Tabela_Karoseria.at(i).material <<
+                Tabela_Karoseria.at(i).masa;
     }
     file.close();
     return true;
@@ -56,9 +59,16 @@ bool wczytaj_typy_karoserii(){
 void MainWindow::on_dodajTypKaroserii_clicked()
 {
     QMessageBox msgBox;
-    if(!ui->typTypKaroserii->text().isEmpty() && !ui->material->text().isEmpty() && !ui->masa->text().isEmpty()){
-        Tabela_Karoseria.append(Karoseria(ui->typTypKaroserii->text(), ui->material->text(), ui->masa->value()));
-        ui->listaTypyKaroserii->addItem(Tabela_Karoseria.last().typ);
+    if(!ui->typTypKaroserii->text().isEmpty() &&
+            !ui->material->text().isEmpty() &&
+            !ui->masa->text().isEmpty()){
+        Tabela_Karoseria.append(Karoseria(
+                                    ui->typTypKaroserii->text(),
+                                    ui->material->text(),
+                                    ui->masa->value()));
+        ui->listaTypyKaroserii->addItem(Tabela_Karoseria.last().typ + " " +
+                                        Tabela_Karoseria.last().material + " " +
+                                        QString::number(Tabela_Karoseria.last().masa));
         msgBox.setText("Dodano karoserię.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -70,7 +80,7 @@ void MainWindow::on_usunTypKaroserii_clicked()
 {
     QMessageBox msgBox;
     int row = ui->listaTypyKaroserii->currentRow();
-    if(ui->listaTypyKaroserii->count() && row != -1){
+    if(row != -1){
         Tabela_Karoseria.remove(row);
         ui->listaTypyKaroserii->takeItem(row);
         msgBox.setText("Usunięto karoserie.");
@@ -97,7 +107,9 @@ void MainWindow::on_wczytajTypyKaroserii_clicked()
     if(wczytaj_typy_karoserii()){
         ui->listaTypyKaroserii->clear();
         for (int i = 0;i < Tabela_Karoseria.length(); i++) {
-            ui->listaTypyKaroserii->addItem(Tabela_Karoseria.at(i).typ);
+            ui->listaTypyKaroserii->addItem(Tabela_Karoseria.at(i).typ + " " +
+                                            Tabela_Karoseria.at(i).material + " " +
+                                            QString::number(Tabela_Karoseria.at(i).masa));
         }
         msgBox.setText("Wczytano karoserie.");
     }else{
@@ -118,10 +130,17 @@ void MainWindow::on_listaTypyKaroserii_clicked()
 void MainWindow::on_modyfikujTypKaroserii_clicked()
 {
     QMessageBox msgBox;
-    if(!ui->typTypKaroserii->text().isEmpty() && !ui->material->text().isEmpty() && !ui->masa->text().isEmpty()){
-        ui->listaTypyKaroserii->currentItem()->setText(ui->typTypKaroserii->text());
+    if(!ui->typTypKaroserii->text().isEmpty() &&
+            !ui->material->text().isEmpty() &&
+            !ui->masa->text().isEmpty()){
+        ui->listaTypyKaroserii->currentItem()->setText(ui->typTypKaroserii->text() + " " +
+                                                       ui->material->text() + " " +
+                                                       QString::number(ui->masa->value()));
         Tabela_Karoseria.replace(ui->listaTypyKaroserii->currentRow(),
-                                   new Karoseria(ui->typTypKaroserii->text(), ui->material->text(), ui->masa->value()));
+                                   new Karoseria(
+                                     ui->typTypKaroserii->text(),
+                                     ui->material->text(),
+                                     ui->masa->value()));
         msgBox.setText("Zmodyfikowano karoserię.");
     }else{
         msgBox.setText("Proszę wybrać karoserię z listy po lewej.");

@@ -32,6 +32,10 @@ void MainWindow::on_wroc_6_clicked()
     ui->stackedWidget->setCurrentIndex(3);
 }
 
+void MainWindow::on_wroc_7_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
 ///koniec wróć
 
 
@@ -64,6 +68,11 @@ void MainWindow::on_typy_karoserii_button_clicked()
 void MainWindow::on_naped_button_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(7);
 }
 
 /// koniec idz do

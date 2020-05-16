@@ -80,6 +80,22 @@ private slots:
 
     void on_modyfikujNaped_clicked();
 
+    void on_wroc_7_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_zapisz_kola_clicked();
+
+    void on_wczytajKola_clicked();
+
+    void on_dodajKola_clicked();
+
+    void on_modyfikujKola_clicked();
+
+    void on_usunKola_clicked();
+
+    void on_wielkoscKola_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui;
 };
