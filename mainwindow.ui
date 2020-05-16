@@ -370,7 +370,7 @@ background-color:#ff003c;
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>41</y>
+        <y>40</y>
         <width>221</width>
         <height>341</height>
        </rect>
@@ -496,7 +496,7 @@ color:red;
        </rect>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>SILNIK</string>
       </property>
      </widget>
     </widget>
@@ -667,7 +667,7 @@ color:red;
       <property name="geometry">
        <rect>
         <x>410</x>
-        <y>140</y>
+        <y>130</y>
         <width>221</width>
         <height>41</height>
        </rect>
@@ -680,7 +680,7 @@ color:red;
       <property name="geometry">
        <rect>
         <x>410</x>
-        <y>180</y>
+        <y>170</y>
         <width>221</width>
         <height>40</height>
        </rect>
@@ -696,7 +696,7 @@ color:red;
       <property name="geometry">
        <rect>
         <x>410</x>
-        <y>240</y>
+        <y>220</y>
         <width>221</width>
         <height>41</height>
        </rect>
@@ -712,13 +712,39 @@ color:red;
       <property name="geometry">
        <rect>
         <x>410</x>
-        <y>280</y>
+        <y>260</y>
         <width>221</width>
         <height>40</height>
        </rect>
       </property>
       <property name="text">
-       <string>MATERIAŁ</string>
+       <string>MASA</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="karoseriePracownicy">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>310</y>
+        <width>221</width>
+        <height>41</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_34">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>350</y>
+        <width>221</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PRACOWNIYC</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -738,6 +764,8 @@ color:red;
      <zorder>material</zorder>
      <zorder>label_9</zorder>
      <zorder>masa</zorder>
+     <zorder>label_34</zorder>
+     <zorder>karoseriePracownicy</zorder>
     </widget>
     <widget class="QWidget" name="naped">
      <widget class="QPushButton" name="wroc_6">
@@ -1251,6 +1279,214 @@ color:red;
      <zorder>wielkoscKola</zorder>
      <zorder>label_15</zorder>
      <zorder>KoloMaterial</zorder>
+    </widget>
+    <widget class="QWidget" name="silnik">
+     <widget class="QPushButton" name="wroc_8">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>400</y>
+        <width>131</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wróć</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="zapiszSilniki">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>400</y>
+        <width>171</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zapisz zmiany</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="wczytajSilniki">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>400</y>
+        <width>301</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wczytaj typy karoserii</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="listaSilnikow">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>221</width>
+        <height>341</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">scrollArea{
+color:red;
+}</string>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
+      <property name="uniformItemSizes">
+       <bool>false</bool>
+      </property>
+      <property name="wordWrap">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_31">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>221</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>SILNIKI</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="dodajSilnik">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>40</y>
+        <width>141</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="modyfikujSilnik">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>160</y>
+        <width>141</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>MODYFIKUJ</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="usunSilnik">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>280</y>
+        <width>141</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>USUŃ</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="silnikTyp">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>40</y>
+        <width>221</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_32">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>80</y>
+        <width>221</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TYP SILNIKA</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="silnikKonie">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>140</y>
+        <width>221</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="wrapping">
+       <bool>false</bool>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="specialValueText">
+       <string/>
+      </property>
+      <property name="prefix">
+       <string/>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>99999</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_33">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>180</y>
+        <width>221</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>KONIE MECHANICZNE</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <zorder>wroc_8</zorder>
+     <zorder>zapiszSilniki</zorder>
+     <zorder>wczytajSilniki</zorder>
+     <zorder>listaSilnikow</zorder>
+     <zorder>label_31</zorder>
+     <zorder>dodajSilnik</zorder>
+     <zorder>modyfikujSilnik</zorder>
+     <zorder>usunSilnik</zorder>
+     <zorder>label_32</zorder>
+     <zorder>silnikTyp</zorder>
+     <zorder>label_33</zorder>
+     <zorder>silnikKonie</zorder>
     </widget>
    </widget>
   </widget>

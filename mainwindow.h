@@ -96,6 +96,10 @@ private slots:
 
     void on_wielkoscKola_valueChanged(int value);
 
+    void on_wroc_8_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

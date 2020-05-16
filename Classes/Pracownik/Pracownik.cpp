@@ -12,6 +12,16 @@ using namespace std;
 
 QVector<Pracownik> Tabela_Pracownikow;
 
+QDataStream &operator <<(QDataStream &out, Pracownik const &p){
+    out << p.imie << p.nazwisko << p.staz_pracy;
+    return out;
+}
+
+QDataStream &operator >>(QDataStream &in, Pracownik &p){
+    in >> p.imie >> p.nazwisko >> p.staz_pracy;
+    return in;
+}
+
 Pracownik::Pracownik(QString imie_,QString naziwkos_,int staz){
     this->imie = imie_;
     this->nazwisko = naziwkos_;
@@ -38,9 +48,7 @@ bool zapisz_pracownikow(){
     file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
     for(int i = 0; i < Tabela_Pracownikow.length(); i++){
-         out << Tabela_Pracownikow.at(i).imie <<
-                Tabela_Pracownikow.at(i).nazwisko <<
-                Tabela_Pracownikow.at(i).staz_pracy;
+         out << Tabela_Pracownikow.at(i);
     }
     file.close();
     return true;
@@ -55,7 +63,7 @@ bool wczytaj_pracownikow(){
     Tabela_Pracownikow.clear();
     while(!in.atEnd()){
        Pracownik p = new Pracownik();
-       in >> p.imie >> p.nazwisko >> p.staz_pracy;
+       in >> p;
        Tabela_Pracownikow.append(p);
     }
     file.close();
@@ -73,6 +81,7 @@ void MainWindow::on_dodajPracownika_clicked()
                               ui->nazwisko->text(),
                               ui->staz->value()));
         ui->listaPracownikow->addItem(Tabela_Pracownikow.last().imie);
+        ui->karoseriePracownicy->addItem(Tabela_Pracownikow.last().imie);
         msgBox.setText("Dodano pracownika.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -87,6 +96,7 @@ void MainWindow::on_usunPracownika_clicked()
     if(ui->listaPracownikow->count() && row != -1){
         Tabela_Pracownikow.remove(row);
         ui->listaPracownikow->takeItem(row);
+        ui->karoseriePracownicy->removeItem(row);
         msgBox.setText("Usunięto pracownika.");
     }else{
         msgBox.setText("Usunięcie pracownika nie powiodło się.");
@@ -110,8 +120,10 @@ void MainWindow::on_wczytaj_pracownikow_clicked()
     QMessageBox msgBox;
     if(wczytaj_pracownikow()){
         ui->listaPracownikow->clear();
+        ui->karoseriePracownicy->clear();
         for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
             ui->listaPracownikow->addItem(Tabela_Pracownikow.at(i).imie);
+            ui->karoseriePracownicy->addItem(Tabela_Pracownikow.at(i).imie);
         }
         msgBox.setText("Wczytano pracowników.");
     }else{
@@ -136,6 +148,7 @@ void MainWindow::on_modyfikuj_clicked()
             && !ui->staz->text().isEmpty()){
         QString imie = ui->imie->text();
         ui->listaPracownikow->currentItem()->setText(imie);
+        ui->karoseriePracownicy->setItemText(ui->listaPracownikow->currentRow(),imie);
         Tabela_Pracownikow.replace(ui->listaPracownikow->currentRow(),
                                    new Pracownik(imie,
                                                  ui->nazwisko->text(),

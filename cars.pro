@@ -20,16 +20,17 @@ SOURCES += \
     Classes/Kola/kola.cpp \
     Classes/Naped/naped.cpp \
     Classes/Pracownik/Pracownik.cpp \
+    Classes/Silnik/silnik.cpp \
     Funkcje_przemieszczjace.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     Classes/Karoseria/karoseria.h \
-    Classes/Karoseria/kola.h \
     Classes/Kola/kola.h \
     Classes/Naped/naped.h \
     Classes/Pracownik/pracownik.h \
+    Classes/Silnik/silnik.h \
     mainwindow.h
 
 FORMS += \
@@ -49,6 +50,7 @@ DISTFILES += \
     .idea/workspace.xml
 
 SUBDIRS += \
+    Factory.pro \
     Factory.pro \
     Factory.pro \
     Factory.pro \

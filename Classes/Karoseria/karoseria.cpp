@@ -10,20 +10,33 @@ Karoseria::Karoseria(){
     this->typ = "";
     this->material = "";
     this->masa = 0.0;
+    this->p = new Pracownik();
 }
 
-Karoseria::Karoseria(QString typ, QString material, float masa){
+Karoseria::Karoseria
+(QString typ, QString material, float masa, Pracownik p){
     this->typ = typ;
     this->material = material;
     this->masa = masa;
+    this->p = new Pracownik(p);
 }
 
 Karoseria::Karoseria(Karoseria *k){
     this->typ = k->typ;
     this->masa = k->masa;
     this->material = k->material;
+    this->p = k->p;
 }
 
+QDataStream &operator <<(QDataStream &out, Karoseria const &k){
+    out << k.typ << k.material << k.masa<< k.p;
+    return out;
+}
+
+QDataStream &operator >>(QDataStream &in, Karoseria &k){
+    in >> k.typ >> k.material >> k.masa >> k.p;
+    return in;
+}
 
 bool zapisz_typy_karoserii(){
     if(Tabela_Karoseria.isEmpty()) return 0;
@@ -32,9 +45,7 @@ bool zapisz_typy_karoserii(){
     file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
     for(int i = 0; i < Tabela_Karoseria.length(); i++){
-         out << Tabela_Karoseria.at(i).typ <<
-                Tabela_Karoseria.at(i).material <<
-                Tabela_Karoseria.at(i).masa;
+         out << Tabela_Karoseria.at(i);
     }
     file.close();
     return true;
@@ -49,7 +60,7 @@ bool wczytaj_typy_karoserii(){
     Tabela_Karoseria.clear();
     while(!in.atEnd()){
        Karoseria k = new Karoseria();
-       in >> k.typ >> k.material >> k.masa;
+       in >> k;
        Tabela_Karoseria.append(k);
     }
     file.close();
@@ -61,14 +72,18 @@ void MainWindow::on_dodajTypKaroserii_clicked()
     QMessageBox msgBox;
     if(!ui->typTypKaroserii->text().isEmpty() &&
             !ui->material->text().isEmpty() &&
-            !ui->masa->text().isEmpty()){
+            !ui->masa->text().isEmpty() &&
+            ui->karoseriePracownicy->count() > 0){
         Tabela_Karoseria.append(Karoseria(
                                     ui->typTypKaroserii->text(),
                                     ui->material->text(),
-                                    ui->masa->value()));
+                                    ui->masa->value(),
+                                    Tabela_Pracownikow.at(ui->karoseriePracownicy->currentIndex())
+                                    ));
         ui->listaTypyKaroserii->addItem(Tabela_Karoseria.last().typ + " " +
                                         Tabela_Karoseria.last().material + " " +
-                                        QString::number(Tabela_Karoseria.last().masa));
+                                        QString::number(Tabela_Karoseria.last().masa) + " " +
+                                        Tabela_Karoseria.last().p.imie);
         msgBox.setText("Dodano karoserię.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -109,7 +124,8 @@ void MainWindow::on_wczytajTypyKaroserii_clicked()
         for (int i = 0;i < Tabela_Karoseria.length(); i++) {
             ui->listaTypyKaroserii->addItem(Tabela_Karoseria.at(i).typ + " " +
                                             Tabela_Karoseria.at(i).material + " " +
-                                            QString::number(Tabela_Karoseria.at(i).masa));
+                                            QString::number(Tabela_Karoseria.at(i).masa) + " " +
+                                            Tabela_Karoseria.at(i).p.imie);
         }
         msgBox.setText("Wczytano karoserie.");
     }else{
@@ -140,7 +156,8 @@ void MainWindow::on_modyfikujTypKaroserii_clicked()
                                    new Karoseria(
                                      ui->typTypKaroserii->text(),
                                      ui->material->text(),
-                                     ui->masa->value()));
+                                     ui->masa->value(),
+                                     Tabela_Karoseria.at(ui->listaTypyKaroserii->currentRow()).p));
         msgBox.setText("Zmodyfikowano karoserię.");
     }else{
         msgBox.setText("Proszę wybrać karoserię z listy po lewej.");
