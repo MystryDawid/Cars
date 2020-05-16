@@ -10,16 +10,19 @@ QVector<Kola> Tabela_Kola;
 Kola::Kola(){
     this->material = "";
     this->wielkosc = 20;
+    this->p = new Pracownik();
 }
 
-Kola::Kola(QString material, float wielkosc){
+Kola::Kola(QString material, float wielkosc, Pracownik p){
     this->material = material;
     this->wielkosc = wielkosc;
+    this->p = new Pracownik(p);
 }
 
 Kola::Kola(Kola *k){
     this->material = k->material;
     this->wielkosc = k->wielkosc;
+    this->p = k->p;
 }
 
 bool zapisz_kola(){
@@ -30,7 +33,8 @@ bool zapisz_kola(){
     QDataStream out(&file);
     for(int i = 0; i < Tabela_Kola.length(); i++){
          out << Tabela_Kola.at(i).material <<
-                Tabela_Kola.at(i).wielkosc;
+                Tabela_Kola.at(i).wielkosc <<
+                Tabela_Kola.at(i).p;
     }
     file.close();
     return true;
@@ -44,7 +48,7 @@ bool wczytaj_kopa(){
     Tabela_Kola.clear();
     while(!in.atEnd()){
        Kola k = new Kola();
-       in >> k.material >> k.wielkosc;
+       in >> k.material >> k.wielkosc >> k.p;
        Tabela_Kola.append(k);
     }
     file.close();
@@ -69,7 +73,8 @@ void MainWindow::on_wczytajKola_clicked()
         ui->listaKol->clear();
         for (int i = 0;i < Tabela_Kola.length(); i++) {
             ui->listaKol->addItem(Tabela_Kola.at(i).material + " " +
-                                  QString::number(Tabela_Kola.at(i).wielkosc));
+                                  QString::number(Tabela_Kola.at(i).wielkosc) + " " +
+                                  Tabela_Kola.at(i).p.imie);
         }
         msgBox.setText("Wczytano koła.");
     }else{
@@ -81,11 +86,14 @@ void MainWindow::on_wczytajKola_clicked()
 void MainWindow::on_dodajKola_clicked()
 {
     QMessageBox msgBox;
-    if(!ui->KoloMaterial->text().isEmpty()){
+    if(!ui->KoloMaterial->text().isEmpty() &&
+            ui->kolaPracownicy->count() > 0){
         Tabela_Kola.append(Kola(ui->KoloMaterial->text(),
-                                  ui->wielkoscKola->value()));
+                                  ui->wielkoscKola->value(),
+                                    Tabela_Pracownikow.at(ui->kolaPracownicy->currentIndex())));
         ui->listaKol->addItem(Tabela_Kola.last().material + " " +
-                              QString::number(Tabela_Kola.last().wielkosc));
+                              QString::number(Tabela_Kola.last().wielkosc) + " " +
+                              Tabela_Kola.last().p.imie);
         msgBox.setText("Dodano koła.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -101,7 +109,8 @@ void MainWindow::on_modyfikujKola_clicked()
                                              QString::number(ui->wielkoscKola->value()));
         Tabela_Kola.replace(ui->listaKol->currentRow(),
                                    new Kola(ui->KoloMaterial->text(),
-                                            ui->wielkoscKola->value()));
+                                            ui->wielkoscKola->value(),
+                                            Tabela_Kola.at(ui->listaKol->currentRow()).p));
         msgBox.setText("Zmodyfikowano koła.");
     }else{
         msgBox.setText("Proszę wybrać koła z listy po lewej.");

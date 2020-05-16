@@ -82,6 +82,7 @@ void MainWindow::on_dodajPracownika_clicked()
                               ui->staz->value()));
         ui->listaPracownikow->addItem(Tabela_Pracownikow.last().imie);
         ui->karoseriePracownicy->addItem(Tabela_Pracownikow.last().imie);
+        ui->kolaPracownicy->addItem(Tabela_Pracownikow.last().imie);
         msgBox.setText("Dodano pracownika.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -97,6 +98,7 @@ void MainWindow::on_usunPracownika_clicked()
         Tabela_Pracownikow.remove(row);
         ui->listaPracownikow->takeItem(row);
         ui->karoseriePracownicy->removeItem(row);
+        ui->kolaPracownicy->removeItem(row);
         msgBox.setText("Usunięto pracownika.");
     }else{
         msgBox.setText("Usunięcie pracownika nie powiodło się.");
@@ -121,9 +123,11 @@ void MainWindow::on_wczytaj_pracownikow_clicked()
     if(wczytaj_pracownikow()){
         ui->listaPracownikow->clear();
         ui->karoseriePracownicy->clear();
+        ui->kolaPracownicy->clear();
         for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
             ui->listaPracownikow->addItem(Tabela_Pracownikow.at(i).imie);
             ui->karoseriePracownicy->addItem(Tabela_Pracownikow.at(i).imie);
+            ui->kolaPracownicy->addItem(Tabela_Pracownikow.at(i).imie);
         }
         msgBox.setText("Wczytano pracowników.");
     }else{
@@ -149,6 +153,7 @@ void MainWindow::on_modyfikuj_clicked()
         QString imie = ui->imie->text();
         ui->listaPracownikow->currentItem()->setText(imie);
         ui->karoseriePracownicy->setItemText(ui->listaPracownikow->currentRow(),imie);
+        ui->kolaPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie);
         Tabela_Pracownikow.replace(ui->listaPracownikow->currentRow(),
                                    new Pracownik(imie,
                                                  ui->nazwisko->text(),
