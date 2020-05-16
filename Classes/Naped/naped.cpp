@@ -10,22 +10,25 @@ using namespace std;
 
 QVector<Naped> Tabela_Naped;
 
-Naped::Naped(QString naped,int przod, int tyl){
+Naped::Naped(QString naped,int przod, int tyl, Pracownik p){
     this->naped = naped;
     this->przod = przod;
     this->tyl = tyl;
+    this->p = new Pracownik(p);
 }
 
 Naped::Naped(){
     this->naped = "Bob";
     this->przod = 100;
     this->tyl = 100;
+    this->p = new Pracownik();
 }
 
 Naped::Naped(Naped *n){
     this->naped = n->naped;
     this->przod = n->przod;
     this->tyl = n->tyl;
+    this->p = n->p;
 }
 
 bool zapisz_naped(){
@@ -37,7 +40,8 @@ bool zapisz_naped(){
     for(int i = 0; i < Tabela_Naped.length(); i++){
          out << Tabela_Naped.at(i).naped <<
                 Tabela_Naped.at(i).przod <<
-                Tabela_Naped.at(i).tyl;
+                Tabela_Naped.at(i).tyl <<
+                Tabela_Naped.at(i).p;
     }
 
     return true;
@@ -51,9 +55,9 @@ bool wczytaj_naped(){
     QDataStream in(&file);
     Tabela_Naped.clear();
     while(!in.atEnd()){
-       Naped p = new Naped();
-       in >> p.naped >> p.przod >> p.tyl;
-       Tabela_Naped.append(p);
+       Naped n = new Naped();
+       in >> n.naped >> n.przod >> n.tyl >> n.p;
+       Tabela_Naped.append(n);
     }
     return true;
 };
@@ -61,13 +65,16 @@ bool wczytaj_naped(){
 void MainWindow::on_dodajNaped_clicked()
 {
     QMessageBox msgBox;
-    if(!ui->napedNaped->text().isEmpty()){
+    if(!ui->napedNaped->text().isEmpty() &&
+            ui->napedPracownicy->count() > 0){
         Tabela_Naped.append(Naped(ui->napedNaped->text(),
                                   ui->wartoscPrzod->value(),
-                                  ui->wartoscTyl->value()));
+                                  ui->wartoscTyl->value(),
+                                  Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex())));
         ui->listaNaped->addItem(Tabela_Naped.last().naped + " " +
                                 QString::number(Tabela_Naped.last().przod) + " " +
-                                QString::number(Tabela_Naped.last().tyl));
+                                QString::number(Tabela_Naped.last().tyl) + " " +
+                                Tabela_Naped.last().p.imie);
         msgBox.setText("Dodano napęd.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -108,7 +115,8 @@ void MainWindow::on_wczytajNaped_clicked()
         for (int i = 0;i < Tabela_Naped.length(); i++) {
             ui->listaNaped->addItem(Tabela_Naped.at(i).naped + " " +
                                     QString::number(Tabela_Naped.at(i).przod) + " " +
-                                    QString::number(Tabela_Naped.at(i).tyl));
+                                    QString::number(Tabela_Naped.at(i).tyl) + " " +
+                                    Tabela_Naped.last().p.imie);
         }
         msgBox.setText("Wczytano napędy.");
     }else{
@@ -131,11 +139,13 @@ void MainWindow::on_modyfikujNaped_clicked()
     if(!ui->napedNaped->text().isEmpty()){
         ui->listaNaped->currentItem()->setText(ui->napedNaped->text() + " " +
                                                QString::number(ui->wartoscPrzod->value()) + " " +
-                                               QString::number(ui->wartoscTyl->value()));
+                                               QString::number(ui->wartoscTyl->value()) + " " +
+                                               Tabela_Naped.at(ui->listaNaped->currentRow()).p.imie);
         Tabela_Naped.replace(ui->listaNaped->currentRow(),
                                    new Naped(ui->napedNaped->text(),
                                              ui->wartoscPrzod->value(),
-                                             ui->wartoscTyl->value()));
+                                             ui->wartoscTyl->value(),
+                                             Tabela_Naped.at(ui->listaNaped->currentRow()).p));
         msgBox.setText("Zmodyfikowano pracownika.");
     }else{
         msgBox.setText("Proszę wybrać pracowanika z listy po lewej.");

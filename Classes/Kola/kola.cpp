@@ -136,3 +136,10 @@ void MainWindow::on_wielkoscKola_valueChanged(int value)
 {
     ui->lcdNumberKoloWielkosc->display(value);
 }
+
+void MainWindow::on_listaKol_clicked(){
+    Kola tmp = new Kola(Tabela_Kola.at(ui->listaKol->currentIndex().row()));
+    ui->KoloMaterial->setText(tmp.material);
+    ui->wielkoscKola->setValue(tmp.wielkosc);
+}
+
