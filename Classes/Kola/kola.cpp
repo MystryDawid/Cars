@@ -106,11 +106,12 @@ void MainWindow::on_modyfikujKola_clicked()
     QMessageBox msgBox;
     if(!ui->KoloMaterial->text().isEmpty()){
         ui->listaKol->currentItem()->setText(ui->KoloMaterial->text() + " " +
-                                             QString::number(ui->wielkoscKola->value()));
+                                             QString::number(ui->wielkoscKola->value()) + " " +
+                                             ui->kolaPracownicy->currentText());
         Tabela_Kola.replace(ui->listaKol->currentRow(),
                                    new Kola(ui->KoloMaterial->text(),
                                             ui->wielkoscKola->value(),
-                                            Tabela_Kola.at(ui->listaKol->currentRow()).p));
+                                            Tabela_Pracownikow.at(ui->kolaPracownicy->currentIndex())));
         msgBox.setText("Zmodyfikowano koła.");
     }else{
         msgBox.setText("Proszę wybrać koła z listy po lewej.");

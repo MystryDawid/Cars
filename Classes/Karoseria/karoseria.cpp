@@ -151,13 +151,14 @@ void MainWindow::on_modyfikujTypKaroserii_clicked()
             !ui->masa->text().isEmpty()){
         ui->listaTypyKaroserii->currentItem()->setText(ui->typTypKaroserii->text() + " " +
                                                        ui->material->text() + " " +
-                                                       QString::number(ui->masa->value()));
+                                                       QString::number(ui->masa->value()) + " " +
+                                                       ui->karoseriePracownicy->currentText());
         Tabela_Karoseria.replace(ui->listaTypyKaroserii->currentRow(),
                                    new Karoseria(
                                      ui->typTypKaroserii->text(),
                                      ui->material->text(),
                                      ui->masa->value(),
-                                     Tabela_Karoseria.at(ui->listaTypyKaroserii->currentRow()).p));
+                                     Tabela_Pracownikow.at(ui->karoseriePracownicy->currentIndex())));
         msgBox.setText("Zmodyfikowano karoserię.");
     }else{
         msgBox.setText("Proszę wybrać karoserię z listy po lewej.");

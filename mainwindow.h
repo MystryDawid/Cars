@@ -102,6 +102,18 @@ private slots:
 
     void on_listaKol_clicked();
 
+    void on_dodajSilnik_clicked();
+
+    void on_usunSilnik_clicked();
+
+    void on_zapiszSilniki_clicked();
+
+    void on_wczytajSilniki_clicked();
+
+    void on_modyfikujSilnik_clicked();
+
+    void on_listaSilnikow_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

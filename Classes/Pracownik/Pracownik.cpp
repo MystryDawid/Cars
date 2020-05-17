@@ -84,6 +84,7 @@ void MainWindow::on_dodajPracownika_clicked()
         ui->karoseriePracownicy->addItem(Tabela_Pracownikow.last().imie);
         ui->kolaPracownicy->addItem(Tabela_Pracownikow.last().imie);
         ui->napedPracownicy->addItem(Tabela_Pracownikow.last().imie);
+        ui->silnikPracownicy->addItem(Tabela_Pracownikow.last().imie);
         msgBox.setText("Dodano pracownika.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -101,6 +102,7 @@ void MainWindow::on_usunPracownika_clicked()
         ui->karoseriePracownicy->removeItem(row);
         ui->kolaPracownicy->removeItem(row);
         ui->napedPracownicy->removeItem(row);
+        ui->silnikPracownicy->removeItem(row);
         msgBox.setText("Usunięto pracownika.");
     }else{
         msgBox.setText("Usunięcie pracownika nie powiodło się.");
@@ -126,11 +128,13 @@ void MainWindow::on_wczytaj_pracownikow_clicked()
         ui->listaPracownikow->clear();
         ui->karoseriePracownicy->clear();
         ui->kolaPracownicy->clear();
+        ui->silnikPracownicy->clear();
         for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
             ui->listaPracownikow->addItem(Tabela_Pracownikow.at(i).imie);
             ui->karoseriePracownicy->addItem(Tabela_Pracownikow.at(i).imie);
             ui->kolaPracownicy->addItem(Tabela_Pracownikow.at(i).imie);
             ui->napedPracownicy->addItem(Tabela_Pracownikow.at(i).imie);
+            ui->silnikPracownicy->addItem(Tabela_Pracownikow.at(i).imie);
         }
         msgBox.setText("Wczytano pracowników.");
     }else{
@@ -158,6 +162,7 @@ void MainWindow::on_modyfikuj_clicked()
         ui->karoseriePracownicy->setItemText(ui->listaPracownikow->currentRow(),imie);
         ui->kolaPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie);
         ui->napedPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie);
+        ui->silnikPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie);
         Tabela_Pracownikow.replace(ui->listaPracownikow->currentRow(),
                                    new Pracownik(imie,
                                                  ui->nazwisko->text(),

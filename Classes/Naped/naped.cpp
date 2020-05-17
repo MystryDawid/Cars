@@ -140,12 +140,12 @@ void MainWindow::on_modyfikujNaped_clicked()
         ui->listaNaped->currentItem()->setText(ui->napedNaped->text() + " " +
                                                QString::number(ui->wartoscPrzod->value()) + " " +
                                                QString::number(ui->wartoscTyl->value()) + " " +
-                                               Tabela_Naped.at(ui->listaNaped->currentRow()).p.imie);
+                                               ui->napedPracownicy->currentText());
         Tabela_Naped.replace(ui->listaNaped->currentRow(),
                                    new Naped(ui->napedNaped->text(),
                                              ui->wartoscPrzod->value(),
                                              ui->wartoscTyl->value(),
-                                             Tabela_Naped.at(ui->listaNaped->currentRow()).p));
+                                             Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex())));
         msgBox.setText("Zmodyfikowano pracownika.");
     }else{
         msgBox.setText("Proszę wybrać pracowanika z listy po lewej.");

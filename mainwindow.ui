@@ -1531,9 +1531,35 @@ color:red;
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
+     <widget class="QComboBox" name="silnikPracownicy">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>230</y>
+        <width>221</width>
+        <height>41</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_35">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>270</y>
+        <width>221</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PRACOWNICY</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <zorder>wczytajSilniki</zorder>
      <zorder>wroc_8</zorder>
      <zorder>zapiszSilniki</zorder>
-     <zorder>wczytajSilniki</zorder>
      <zorder>listaSilnikow</zorder>
      <zorder>label_31</zorder>
      <zorder>dodajSilnik</zorder>
@@ -1543,6 +1569,8 @@ color:red;
      <zorder>silnikTyp</zorder>
      <zorder>label_33</zorder>
      <zorder>silnikKonie</zorder>
+     <zorder>label_35</zorder>
+     <zorder>silnikPracownicy</zorder>
     </widget>
    </widget>
   </widget>
