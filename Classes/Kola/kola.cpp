@@ -35,6 +35,7 @@ QDataStream &operator >>(QDataStream &in, Kola &k){
     return in;
 }
 
+
 bool zapisz_kola(){
     if(Tabela_Kola.isEmpty()) return 0;
     QString plik = "./kola.dat";
@@ -161,8 +162,7 @@ void MainWindow::on_wielkoscKola_valueChanged(int value)
 }
 
 void MainWindow::on_listaKol_clicked(){
-    Kola tmp = new Kola(Tabela_Kola.at(ui->listaKol->currentIndex().row()));
-    ui->KoloMaterial->setText(tmp.kolaMaterial);
-    ui->wielkoscKola->setValue(tmp.wielkosc);
+    ui->KoloMaterial->setText(Tabela_Kola.at(ui->listaKol->currentIndex().row()).kolaMaterial);
+    ui->wielkoscKola->setValue(Tabela_Kola.at(ui->listaKol->currentIndex().row()).wielkosc);
 }
 

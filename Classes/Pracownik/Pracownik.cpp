@@ -161,11 +161,9 @@ void MainWindow::on_wczytaj_pracownikow_clicked()
 
 void MainWindow::on_listaPracownikow_clicked()
 {
-   Pracownik tmp = new Pracownik(
-               Tabela_Pracownikow.at(ui->listaPracownikow->currentIndex().row()));
-   ui->imie->setText(tmp.imie);
-   ui->nazwisko->setText(tmp.nazwisko);
-   ui->staz->setValue(tmp.staz_pracy);
+   ui->imie->setText(Tabela_Pracownikow.at(ui->listaPracownikow->currentIndex().row()).imie);
+   ui->nazwisko->setText(Tabela_Pracownikow.at(ui->listaPracownikow->currentIndex().row()).nazwisko);
+   ui->staz->setValue(Tabela_Pracownikow.at(ui->listaPracownikow->currentIndex().row()).staz_pracy);
 }
 
 void MainWindow::on_modyfikuj_clicked()
@@ -187,7 +185,7 @@ void MainWindow::on_modyfikuj_clicked()
         ui->autoPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie + " " +
                                         ui->nazwisko->text());
         Tabela_Pracownikow.replace(ui->listaPracownikow->currentRow(),
-                                   new Pracownik(imie,
+                                   Pracownik(imie,
                                                  ui->nazwisko->text(),
                                                  ui->staz->value()));
         msgBox.setText("Zmodyfikowano pracownika.");

@@ -74,7 +74,7 @@ void MainWindow::on_dodajTypKaroserii_clicked()
             !ui->material->text().isEmpty() &&
             !ui->masa->text().isEmpty() &&
             ui->karoseriePracownicy->count() > 0){
-        Tabela_Karoseria.append(Karoseria(
+        Tabela_Karoseria.append(new Karoseria(
                                     ui->typTypKaroserii->text(),
                                     ui->material->text(),
                                     ui->masa->value(),
@@ -149,10 +149,12 @@ void MainWindow::on_wczytajTypyKaroserii_clicked()
 
 void MainWindow::on_listaTypyKaroserii_clicked()
 {
-    Karoseria tmp = new Karoseria(Tabela_Karoseria.at(ui->listaTypyKaroserii->currentIndex().row()));
-    ui->typTypKaroserii->setText(tmp.karoseriaTyp);
-    ui->masa->setValue(tmp.masa);
-    ui->material->setText(tmp.karoseriaMaterial);
+    ui->typTypKaroserii->setText(
+                Tabela_Karoseria.at(ui->listaTypyKaroserii->currentIndex().row()).karoseriaTyp);
+    ui->masa->setValue(
+                Tabela_Karoseria.at(ui->listaTypyKaroserii->currentIndex().row()).masa);
+    ui->material->setText(
+                Tabela_Karoseria.at(ui->listaTypyKaroserii->currentIndex().row()).karoseriaMaterial);
 }
 
 void MainWindow::on_modyfikujTypKaroserii_clicked()

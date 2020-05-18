@@ -79,7 +79,7 @@ void MainWindow::on_dodajAuto_clicked(){
             ui->AutaSilnik->count() > 0 &&
             ui->autoPracownicy->count() > 0){
 
-        Tabela_Aut.append(Auto(
+        Tabela_Aut.append(new Auto(
                               Tabela_Karoseria.at(ui->AutaKaroseria->currentIndex()),
                               Tabela_Kola.at(ui->AutaKola->currentIndex()),
                               Tabela_Naped.at(ui->AutaNaped->currentIndex()),
@@ -151,7 +151,7 @@ void MainWindow::on_modyfikujAuto_clicked(){
             ui->autoPracownicy->count() > 0 &&
             ui->listaAut->currentRow() != -1){
 
-        Tabela_Aut.replace(ui->listaAut->currentRow(), Auto(
+        Tabela_Aut.replace(ui->listaAut->currentRow(),new Auto(
                               Tabela_Karoseria.at(ui->AutaKaroseria->currentIndex()),
                               Tabela_Kola.at(ui->AutaKola->currentIndex()),
                               Tabela_Naped.at(ui->AutaNaped->currentIndex()),

@@ -62,7 +62,7 @@ bool wczytaj_naped(){
     QDataStream in(&file);
     Tabela_Naped.clear();
     while(!in.atEnd()){
-       Naped n = new Naped();
+       Naped n;
        in >> n;
        Tabela_Naped.append(n);
     }
@@ -74,18 +74,21 @@ void MainWindow::on_dodajNaped_clicked()
     QMessageBox msgBox;
     if(!ui->napedNaped->text().isEmpty() &&
             ui->napedPracownicy->count() > 0){
-        Tabela_Naped.append(Naped(ui->napedNaped->text(),
-                                  ui->wartoscPrzod->value(),
-                                  ui->wartoscTyl->value(),
+        QString text = ui->napedNaped->text();
+        int przod = ui->wartoscPrzod->value();
+        int tyl = ui->wartoscTyl->value();
+        Tabela_Naped.append(Naped(text,
+                                  przod,
+                                  tyl,
                                   Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex())));
-        ui->listaNaped->addItem(Tabela_Naped.last().naped + " " +
-                                QString::number(Tabela_Naped.last().przod) + " " +
-                                QString::number(Tabela_Naped.last().tyl) + " " +
+        ui->listaNaped->addItem(text + " " +
+                                QString::number(przod) + " " +
+                                QString::number(tyl) + " " +
                                 Tabela_Naped.last().p.imie);
 
-        ui->AutaNaped->addItem(Tabela_Naped.last().naped + " " +
-                                QString::number(Tabela_Naped.last().przod) + " " +
-                                QString::number(Tabela_Naped.last().tyl) + " " +
+        ui->AutaNaped->addItem(text + " " +
+                                QString::number(przod) + " " +
+                                QString::number(tyl) + " " +
                                 Tabela_Naped.last().p.imie);
         msgBox.setText("Dodano napęd.");
     }else{
@@ -126,14 +129,17 @@ void MainWindow::on_wczytajNaped_clicked()
     if(wczytaj_naped()){
         ui->listaNaped->clear();
         for (int i = 0;i < Tabela_Naped.length(); i++) {
-            ui->listaNaped->addItem(Tabela_Naped.at(i).naped + " " +
-                                    QString::number(Tabela_Naped.at(i).przod) + " " +
-                                    QString::number(Tabela_Naped.at(i).tyl) + " " +
+            QString naped = Tabela_Naped.at(i).naped;
+            int przod = Tabela_Naped.at(i).przod;
+            int tyl = Tabela_Naped.at(i).tyl;
+            ui->listaNaped->addItem(naped + " " +
+                                    QString::number(przod) + " " +
+                                    QString::number(tyl) + " " +
                                     Tabela_Naped.last().p.imie);
 
-            ui->AutaNaped->addItem(Tabela_Naped.at(i).naped + " " +
-                                    QString::number(Tabela_Naped.at(i).przod) + " " +
-                                    QString::number(Tabela_Naped.at(i).tyl) + " " +
+            ui->AutaNaped->addItem(naped + " " +
+                                    QString::number(przod) + " " +
+                                    QString::number(tyl) + " " +
                                     Tabela_Naped.last().p.imie);
         }
         msgBox.setText("Wczytano napędy.");
@@ -145,7 +151,7 @@ void MainWindow::on_wczytajNaped_clicked()
 
 void MainWindow::on_listaNaped_clicked()
 {
-    Naped tmp = new Naped(Tabela_Naped.at(ui->listaNaped->currentIndex().row()));
+    Naped tmp = Tabela_Naped.at(ui->listaNaped->currentIndex().row());
     ui->napedNaped->setText(tmp.naped);
     ui->wartoscPrzod->setValue(tmp.przod);
     ui->wartoscTyl->setValue(tmp.tyl);
@@ -155,21 +161,25 @@ void MainWindow::on_modyfikujNaped_clicked()
 {
     QMessageBox msgBox;
     if(!ui->napedNaped->text().isEmpty()){
-        ui->listaNaped->currentItem()->setText(ui->napedNaped->text() + " " +
-                                               QString::number(ui->wartoscPrzod->value()) + " " +
-                                               QString::number(ui->wartoscTyl->value()) + " " +
-                                               ui->napedPracownicy->currentText());
+        int przod = ui->wartoscPrzod->value();
+        int tyl = ui->wartoscTyl->value();
+        QString naped = ui->napedNaped->text();
+        QString napedPracownik = ui->napedPracownicy->currentText();
+        ui->listaNaped->currentItem()->setText(naped + " " +
+                                               QString::number(przod) + " " +
+                                               QString::number(tyl) + " " +
+                                               napedPracownik);
 
-        ui->AutaNaped->setItemText(ui->listaPracownikow->currentRow(),ui->napedNaped->text() + " " +
-                                               QString::number(ui->wartoscPrzod->value()) + " " +
-                                               QString::number(ui->wartoscTyl->value()) + " " +
-                                               ui->napedPracownicy->currentText());
+        ui->AutaNaped->setItemText(ui->listaPracownikow->currentRow(),naped + " " +
+                                               QString::number(przod) + " " +
+                                               QString::number(tyl) + " " +
+                                               napedPracownik);
 
         Tabela_Naped.replace(ui->listaNaped->currentRow(),
-                                   new Naped(ui->napedNaped->text(),
-                                             ui->wartoscPrzod->value(),
-                                             ui->wartoscTyl->value(),
-                                             Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex())));
+                                   Naped(naped,
+                                         przod,
+                                         tyl,
+                                         Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex())));
         msgBox.setText("Zmodyfikowano pracownika.");
     }else{
         msgBox.setText("Proszę wybrać pracowanika z listy po lewej.");
