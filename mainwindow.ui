@@ -735,21 +735,7 @@ color:red;
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="WybierzAuto">
-     <widget class="QPushButton" name="wroc_4">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>400</y>
-        <width>131</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Wróć</string>
-      </property>
-     </widget>
-    </widget>
+    <widget class="QWidget" name="WybierzAuto"/>
     <widget class="QWidget" name="typy_karoserii">
      <widget class="QPushButton" name="wroc_5">
       <property name="geometry">
