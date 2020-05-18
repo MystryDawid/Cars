@@ -62,7 +62,7 @@ bool wczytaj_pracownikow(){
     QDataStream in(&file);
     Tabela_Pracownikow.clear();
     while(!in.atEnd()){
-       Pracownik p = new Pracownik();
+       Pracownik p;
        in >> p;
        Tabela_Pracownikow.append(p);
     }
@@ -76,22 +76,22 @@ void MainWindow::on_dodajPracownika_clicked()
     QMessageBox msgBox;
     if(!ui->imie->text().isEmpty() && !ui->nazwisko->text().isEmpty()
             && !ui->staz->text().isEmpty()){
+
+        QString imie = ui->imie->text();
+        QString nazwisko = ui->nazwisko->text();
+
         Tabela_Pracownikow.append(
-                    Pracownik(ui->imie->text(),
-                              ui->nazwisko->text(),
+                    Pracownik(imie,
+                              nazwisko,
                               ui->staz->value()));
-        ui->listaPracownikow->addItem(Tabela_Pracownikow.last().imie + " " +
-                                      Tabela_Pracownikow.last().nazwisko);
-        ui->karoseriePracownicy->addItem(Tabela_Pracownikow.last().imie + " " +
-                                         Tabela_Pracownikow.last().nazwisko);
-        ui->kolaPracownicy->addItem(Tabela_Pracownikow.last().imie + " " +
-                                    Tabela_Pracownikow.last().nazwisko);
-        ui->napedPracownicy->addItem(Tabela_Pracownikow.last().imie + " " +
-                                     Tabela_Pracownikow.last().nazwisko);
-        ui->silnikPracownicy->addItem(Tabela_Pracownikow.last().imie + " " +
-                                      Tabela_Pracownikow.last().nazwisko);
-        ui->autoPracownicy->addItem(Tabela_Pracownikow.last().imie + " " +
-                                    Tabela_Pracownikow.last().nazwisko);
+
+        ui->listaPracownikow->addItem(imie + " " + nazwisko);
+        ui->karoseriePracownicy->addItem(imie + " " + nazwisko);
+        ui->kolaPracownicy->addItem(imie + " " + nazwisko);
+        ui->napedPracownicy->addItem(imie + " " + nazwisko);
+        ui->silnikPracownicy->addItem(imie + " " + nazwisko);
+        ui->autoPracownicy->addItem(imie + " " + nazwisko);
+
         msgBox.setText("Dodano pracownika.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -104,6 +104,7 @@ void MainWindow::on_usunPracownika_clicked()
     QMessageBox msgBox;
     int row =  ui->listaPracownikow->currentRow();
     if(ui->listaPracownikow->count() && row != -1){
+
         Tabela_Pracownikow.remove(row);
         ui->listaPracownikow->takeItem(row);
         ui->karoseriePracownicy->removeItem(row);
@@ -111,6 +112,7 @@ void MainWindow::on_usunPracownika_clicked()
         ui->napedPracownicy->removeItem(row);
         ui->silnikPracownicy->removeItem(row);
         ui->autoPracownicy->removeItem(row);
+
         msgBox.setText("Usunięto pracownika.");
     }else{
         msgBox.setText("Usunięcie pracownika nie powiodło się.");
@@ -133,24 +135,24 @@ void MainWindow::on_wczytaj_pracownikow_clicked()
 {
     QMessageBox msgBox;
     if(wczytaj_pracownikow()){
+
         ui->listaPracownikow->clear();
         ui->karoseriePracownicy->clear();
         ui->kolaPracownicy->clear();
         ui->silnikPracownicy->clear();
         ui->autoPracownicy->clear();
+
         for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
-            ui->listaPracownikow->addItem(Tabela_Pracownikow.at(i).imie + " " +
-                                          Tabela_Pracownikow.at(i).nazwisko);
-            ui->karoseriePracownicy->addItem(Tabela_Pracownikow.at(i).imie + " " +
-                                             Tabela_Pracownikow.at(i).nazwisko);
-            ui->kolaPracownicy->addItem(Tabela_Pracownikow.at(i).imie + " " +
-                                        Tabela_Pracownikow.at(i).nazwisko);
-            ui->napedPracownicy->addItem(Tabela_Pracownikow.at(i).imie + " " +
-                                         Tabela_Pracownikow.at(i).nazwisko);
-            ui->silnikPracownicy->addItem(Tabela_Pracownikow.at(i).imie + " " +
-                                          Tabela_Pracownikow.at(i).nazwisko);
-            ui->autoPracownicy->addItem(Tabela_Pracownikow.at(i).imie + " " +
-                                        Tabela_Pracownikow.at(i).nazwisko);
+
+            QString imie = Tabela_Pracownikow.at(i).imie;
+            QString nazwisko = Tabela_Pracownikow.at(i).nazwisko;
+
+            ui->listaPracownikow->addItem(imie + " " + nazwisko);
+            ui->karoseriePracownicy->addItem(imie + " " + nazwisko);
+            ui->kolaPracownicy->addItem(imie + " " + nazwisko);
+            ui->napedPracownicy->addItem(imie + " " + nazwisko);
+            ui->silnikPracownicy->addItem(imie + " " + nazwisko);
+            ui->autoPracownicy->addItem(imie + " " + nazwisko);
         }
         msgBox.setText("Wczytano pracowników.");
     }else{
@@ -171,23 +173,31 @@ void MainWindow::on_modyfikuj_clicked()
     QMessageBox msgBox;
     if(!ui->imie->text().isEmpty() && !ui->nazwisko->text().isEmpty()
             && !ui->staz->text().isEmpty()){
+
         QString imie = ui->imie->text();
-        ui->listaPracownikow->currentItem()->setText(imie + " " +
-                                                     ui->nazwisko->text());
-        ui->karoseriePracownicy->setItemText(ui->listaPracownikow->currentRow(),imie + " " +
-                                             ui->nazwisko->text());
-        ui->kolaPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie + " " +
-                                        ui->nazwisko->text());
-        ui->napedPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie + " " +
-                                         ui->nazwisko->text());
-        ui->silnikPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie + " " +
-                                          ui->nazwisko->text());
-        ui->autoPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie + " " +
-                                        ui->nazwisko->text());
+        QString nazwisko = ui->nazwisko->text();
+
+        ui->listaPracownikow->currentItem()->setText(imie + " " + nazwisko);
+
+        ui->karoseriePracownicy->setItemText(ui->listaPracownikow->currentRow(),
+                                             imie + " " + nazwisko);
+
+        ui->kolaPracownicy->setItemText(ui->listaPracownikow->currentRow(),
+                                        imie + " " + nazwisko);
+
+        ui->napedPracownicy->setItemText(ui->listaPracownikow->currentRow(),
+                                         imie + " " + nazwisko);
+
+        ui->silnikPracownicy->setItemText(ui->listaPracownikow->currentRow(),
+                                          imie + " " + nazwisko);
+
+        ui->autoPracownicy->setItemText(ui->listaPracownikow->currentRow(),
+                                        imie + " " + nazwisko);
+
         Tabela_Pracownikow.replace(ui->listaPracownikow->currentRow(),
-                                   Pracownik(imie,
-                                                 ui->nazwisko->text(),
+                                   Pracownik(imie, nazwisko,
                                                  ui->staz->value()));
+
         msgBox.setText("Zmodyfikowano pracownika.");
     }else{
         msgBox.setText("Proszę wybrać pracowanika z listy po lewej.");

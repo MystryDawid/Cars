@@ -63,7 +63,7 @@ bool wczytaj_auta(){
     QDataStream in(&file);
     Tabela_Aut.clear();
     while(!in.atEnd()){
-       Auto a = new Auto();
+       Auto a;
        in >> a;
        Tabela_Aut.append(a);
     }
@@ -79,7 +79,7 @@ void MainWindow::on_dodajAuto_clicked(){
             ui->AutaSilnik->count() > 0 &&
             ui->autoPracownicy->count() > 0){
 
-        Tabela_Aut.append(new Auto(
+        Tabela_Aut.append(Auto(
                               Tabela_Karoseria.at(ui->AutaKaroseria->currentIndex()),
                               Tabela_Kola.at(ui->AutaKola->currentIndex()),
                               Tabela_Naped.at(ui->AutaNaped->currentIndex()),
@@ -105,8 +105,10 @@ void MainWindow::on_usunAuto_clicked(){
     QMessageBox msgBox;
     int row = ui->listaAut->currentRow();
     if(row != -1){
+
         Tabela_Aut.remove(row);
         ui->listaAut->takeItem(row);
+
         msgBox.setText("Usunięto Samochód.");
     }else{
         msgBox.setText("Usunięcie samochodu nie powiodło się.");
@@ -129,6 +131,7 @@ void MainWindow::on_wczytajAuto_clicked(){
     if(wczytaj_auta()){
         ui->listaAut->clear();
         for (int i = 0;i < Tabela_Aut.length(); i++) {
+
             ui->listaAut->addItem(Tabela_Aut.at(i).karoseria.karoseriaTyp + " " +
                                   QString::number(Tabela_Aut.at(i).naped.tyl) + " " +
                                   Tabela_Aut.at(i).silnik.typSilnika + " " +
@@ -151,7 +154,7 @@ void MainWindow::on_modyfikujAuto_clicked(){
             ui->autoPracownicy->count() > 0 &&
             ui->listaAut->currentRow() != -1){
 
-        Tabela_Aut.replace(ui->listaAut->currentRow(),new Auto(
+        Tabela_Aut.replace(ui->listaAut->currentRow(), Auto(
                               Tabela_Karoseria.at(ui->AutaKaroseria->currentIndex()),
                               Tabela_Kola.at(ui->AutaKola->currentIndex()),
                               Tabela_Naped.at(ui->AutaNaped->currentIndex()),

@@ -72,24 +72,30 @@ bool wczytaj_naped(){
 void MainWindow::on_dodajNaped_clicked()
 {
     QMessageBox msgBox;
+
     if(!ui->napedNaped->text().isEmpty() &&
             ui->napedPracownicy->count() > 0){
+
         QString text = ui->napedNaped->text();
         int przod = ui->wartoscPrzod->value();
         int tyl = ui->wartoscTyl->value();
+        QString imie = Tabela_Naped.last().p.imie;
+
         Tabela_Naped.append(Naped(text,
                                   przod,
                                   tyl,
                                   Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex())));
+
         ui->listaNaped->addItem(text + " " +
                                 QString::number(przod) + " " +
                                 QString::number(tyl) + " " +
-                                Tabela_Naped.last().p.imie);
+                                imie);
 
         ui->AutaNaped->addItem(text + " " +
                                 QString::number(przod) + " " +
                                 QString::number(tyl) + " " +
-                                Tabela_Naped.last().p.imie);
+                                imie);
+
         msgBox.setText("Dodano napęd.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -101,10 +107,13 @@ void MainWindow::on_usunNaped_clicked()
 {
     QMessageBox msgBox;
     int row =  ui->listaNaped->currentRow();
+
     if(row != -1){
+
         Tabela_Naped.remove(row);
         ui->listaNaped->takeItem(row);
         ui->AutaNaped->removeItem(row);
+
         msgBox.setText("Usunięto napęd.");
     }else{
         msgBox.setText("Usunięcie napędu nie powiodło się.");
@@ -126,21 +135,27 @@ void MainWindow::on_zapiszNaped_clicked()
 void MainWindow::on_wczytajNaped_clicked()
 {
     QMessageBox msgBox;
+
     if(wczytaj_naped()){
+
         ui->listaNaped->clear();
+
         for (int i = 0;i < Tabela_Naped.length(); i++) {
+
             QString naped = Tabela_Naped.at(i).naped;
             int przod = Tabela_Naped.at(i).przod;
             int tyl = Tabela_Naped.at(i).tyl;
+            QString imie = Tabela_Naped.last().p.imie;
+
             ui->listaNaped->addItem(naped + " " +
                                     QString::number(przod) + " " +
                                     QString::number(tyl) + " " +
-                                    Tabela_Naped.last().p.imie);
+                                    imie);
 
             ui->AutaNaped->addItem(naped + " " +
                                     QString::number(przod) + " " +
                                     QString::number(tyl) + " " +
-                                    Tabela_Naped.last().p.imie);
+                                    imie);
         }
         msgBox.setText("Wczytano napędy.");
     }else{
@@ -160,11 +175,14 @@ void MainWindow::on_listaNaped_clicked()
 void MainWindow::on_modyfikujNaped_clicked()
 {
     QMessageBox msgBox;
+
     if(!ui->napedNaped->text().isEmpty()){
+
         int przod = ui->wartoscPrzod->value();
         int tyl = ui->wartoscTyl->value();
         QString naped = ui->napedNaped->text();
         QString napedPracownik = ui->napedPracownicy->currentText();
+
         ui->listaNaped->currentItem()->setText(naped + " " +
                                                QString::number(przod) + " " +
                                                QString::number(tyl) + " " +
@@ -180,6 +198,7 @@ void MainWindow::on_modyfikujNaped_clicked()
                                          przod,
                                          tyl,
                                          Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex())));
+
         msgBox.setText("Zmodyfikowano pracownika.");
     }else{
         msgBox.setText("Proszę wybrać pracowanika z listy po lewej.");

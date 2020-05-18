@@ -59,7 +59,7 @@ bool wczytaj_silniki(){
     QDataStream in(&file);
     Tabela_Silnik.clear();
     while(!in.atEnd()){
-       Silnik s = new Silnik();
+       Silnik s;
        in >> s;
        Tabela_Silnik.append(s);
     }
@@ -72,14 +72,20 @@ void MainWindow::on_dodajSilnik_clicked()
     if(!ui->silnikTyp->text().isEmpty() &&
             !ui->silnikKonie->text().isEmpty() &&
             ui->napedPracownicy->count() > 0){
-        Tabela_Silnik.append(Silnik(ui->silnikTyp->text(),
-                                  ui->silnikKonie->value(),
+
+        QString silnik = ui->silnikTyp->text();
+        int konie = ui->silnikKonie->value();
+
+        Tabela_Silnik.append(Silnik(silnik,
+                                  konie,
                                   Tabela_Pracownikow.at(ui->silnikPracownicy->currentIndex())));
-        ui->listaSilnikow->addItem(Tabela_Silnik.last().typSilnika + " " +
-                                QString::number(Tabela_Silnik.last().mocSilnika) + " " +
+
+        ui->listaSilnikow->addItem(silnik + " " +
+                                QString::number(konie) + " " +
                                 Tabela_Silnik.last().p.imie);
-        ui->AutaSilnik->addItem(Tabela_Silnik.last().typSilnika + " " +
-                                QString::number(Tabela_Silnik.last().mocSilnika) + " " +
+
+        ui->AutaSilnik->addItem(silnik + " " +
+                                QString::number(konie) + " " +
                                 Tabela_Silnik.last().p.imie);
 
         msgBox.setText("Dodano silnik.");
@@ -94,9 +100,11 @@ void MainWindow::on_usunSilnik_clicked()
     QMessageBox msgBox;
     int row =  ui->listaSilnikow->currentRow();
     if(row != -1){
+
         Tabela_Silnik.remove(row);
         ui->listaSilnikow->takeItem(row);
         ui->AutaSilnik->removeItem(row);
+
         msgBox.setText("Usunięto silnik.");
     }else{
         msgBox.setText("Usunięcie silnika nie powiodło się.");
@@ -119,15 +127,22 @@ void MainWindow::on_wczytajSilniki_clicked()
 {
     QMessageBox msgBox;
     if(wczytaj_silniki()){
-        ui->listaSilnikow->clear();
-        for (int i = 0;i < Tabela_Silnik.length(); i++) {
-            ui->listaSilnikow->addItem(Tabela_Silnik.at(i).typSilnika + " " +
-                                    QString::number(Tabela_Silnik.at(i).mocSilnika) + " " +
-                                    Tabela_Silnik.last().p.imie);
 
-            ui->AutaSilnik->addItem(Tabela_Silnik.at(i).typSilnika + " " +
-                                    QString::number(Tabela_Silnik.at(i).mocSilnika) + " " +
-                                    Tabela_Silnik.last().p.imie);
+        ui->listaSilnikow->clear();
+
+        for (int i = 0;i < Tabela_Silnik.length(); i++) {
+
+            QString silnik = Tabela_Silnik.at(i).typSilnika;
+            int moc = Tabela_Silnik.at(i).mocSilnika;
+            QString imie = Tabela_Silnik.last().p.imie;
+
+            ui->listaSilnikow->addItem(silnik + " " +
+                                    QString::number(moc) + " " +
+                                    imie);
+
+            ui->AutaSilnik->addItem(silnik + " " +
+                                    QString::number(moc) + " " +
+                                    imie);
         }
         msgBox.setText("Wczytano silniki.");
     }else{
@@ -140,17 +155,24 @@ void MainWindow::on_modyfikujSilnik_clicked()
 {
     QMessageBox msgBox;
     if(!ui->silnikTyp->text().isEmpty() && !ui->silnikKonie->text().isEmpty()){
-        ui->listaSilnikow->currentItem()->setText(ui->silnikTyp->text() + " " +
-                                               QString::number(ui->silnikKonie->value()) + " " +
-                                               ui->silnikPracownicy->currentText());
-        ui->AutaSilnik->setItemText(ui->listaPracownikow->currentRow(), ui->silnikTyp->text() + " " +
-                                               QString::number(ui->silnikKonie->value()) + " " +
-                                               ui->silnikPracownicy->currentText());
+
+        QString silnik = ui->silnikTyp->text();
+        int moc = ui->silnikKonie->value();
+        QString silnikPracownik = ui->silnikPracownicy->currentText();
+
+        ui->listaSilnikow->currentItem()->setText(silnik + " " +
+                                                  QString::number(moc) + " " +
+                                                  silnikPracownik);
+
+        ui->AutaSilnik->setItemText(ui->listaPracownikow->currentRow(),
+                                    silnik + " " + QString::number(moc) + " " +
+                                    silnikPracownik);
 
         Tabela_Silnik.replace(ui->listaSilnikow->currentRow(),
-                                   new Silnik(ui->silnikTyp->text(),
-                                             ui->silnikKonie->value(),
-                                             Tabela_Pracownikow.at(ui->silnikPracownicy->currentIndex())));
+                                   Silnik(silnik,
+                                          moc,
+                                          Tabela_Pracownikow.at(ui->silnikPracownicy->currentIndex())));
+
         msgBox.setText("Zmodyfikowano silnik.");
     }else{
         msgBox.setText("Proszę wybrać silnik z listy po lewej.");
@@ -161,7 +183,7 @@ void MainWindow::on_modyfikujSilnik_clicked()
 
 void MainWindow::on_listaSilnikow_clicked()
 {
-    Silnik tmp = new Silnik(Tabela_Silnik.at(ui->listaSilnikow->currentIndex().row()));
+    Silnik tmp = Tabela_Silnik.at(ui->listaSilnikow->currentIndex().row());
     ui->silnikTyp->setText(tmp.typSilnika);
     ui->silnikKonie->setValue(tmp.mocSilnika);
 }
