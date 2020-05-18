@@ -30,8 +30,6 @@ private slots:
 
     void on_wroc_clicked();
 
-    void on_wroc_2_clicked();
-
     void on_wroc_3_clicked();
 
     void on_wroc_4_clicked();
@@ -113,6 +111,18 @@ private slots:
     void on_modyfikujSilnik_clicked();
 
     void on_listaSilnikow_clicked();
+
+    void on_dodajAuto_clicked();
+
+    void on_usunAuto_clicked();
+
+    void on_zapiszAuto_clicked();
+
+    void on_wczytajAuto_clicked();
+
+    void on_modyfikujAuto_clicked();
+
+    void on_wroc_9_clicked();
 
 private:
     Ui::MainWindow *ui;

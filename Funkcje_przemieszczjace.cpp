@@ -7,11 +7,6 @@ void MainWindow::on_wroc_clicked()
     ui->stackedWidget->setCurrentIndex(0);
 }
 
-void MainWindow::on_wroc_2_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
 void MainWindow::on_wroc_3_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
@@ -41,6 +36,12 @@ void MainWindow::on_wroc_8_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
 }
+
+void MainWindow::on_wroc_9_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
 ///koniec wróć
 
 

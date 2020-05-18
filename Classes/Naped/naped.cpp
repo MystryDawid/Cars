@@ -31,6 +31,16 @@ Naped::Naped(Naped *n){
     this->p = n->p;
 }
 
+QDataStream &operator <<(QDataStream &out, Naped const &n){
+    out << n.naped << n.przod << n.tyl << n.p;
+    return out;
+}
+
+QDataStream &operator >>(QDataStream &in, Naped &n){
+    in >> n.naped >> n.przod >> n.tyl >> n.p;
+    return in;
+}
+
 bool zapisz_naped(){
     if(Tabela_Naped.isEmpty()) return 0;
     QString plik = "./napedy.dat";
@@ -38,10 +48,7 @@ bool zapisz_naped(){
     file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
     for(int i = 0; i < Tabela_Naped.length(); i++){
-         out << Tabela_Naped.at(i).naped <<
-                Tabela_Naped.at(i).przod <<
-                Tabela_Naped.at(i).tyl <<
-                Tabela_Naped.at(i).p;
+         out << Tabela_Naped.at(i);
     }
 
     return true;
@@ -56,7 +63,7 @@ bool wczytaj_naped(){
     Tabela_Naped.clear();
     while(!in.atEnd()){
        Naped n = new Naped();
-       in >> n.naped >> n.przod >> n.tyl >> n.p;
+       in >> n;
        Tabela_Naped.append(n);
     }
     return true;
@@ -75,6 +82,11 @@ void MainWindow::on_dodajNaped_clicked()
                                 QString::number(Tabela_Naped.last().przod) + " " +
                                 QString::number(Tabela_Naped.last().tyl) + " " +
                                 Tabela_Naped.last().p.imie);
+
+        ui->AutaNaped->addItem(Tabela_Naped.last().naped + " " +
+                                QString::number(Tabela_Naped.last().przod) + " " +
+                                QString::number(Tabela_Naped.last().tyl) + " " +
+                                Tabela_Naped.last().p.imie);
         msgBox.setText("Dodano napęd.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -89,6 +101,7 @@ void MainWindow::on_usunNaped_clicked()
     if(row != -1){
         Tabela_Naped.remove(row);
         ui->listaNaped->takeItem(row);
+        ui->AutaNaped->removeItem(row);
         msgBox.setText("Usunięto napęd.");
     }else{
         msgBox.setText("Usunięcie napędu nie powiodło się.");
@@ -117,6 +130,11 @@ void MainWindow::on_wczytajNaped_clicked()
                                     QString::number(Tabela_Naped.at(i).przod) + " " +
                                     QString::number(Tabela_Naped.at(i).tyl) + " " +
                                     Tabela_Naped.last().p.imie);
+
+            ui->AutaNaped->addItem(Tabela_Naped.at(i).naped + " " +
+                                    QString::number(Tabela_Naped.at(i).przod) + " " +
+                                    QString::number(Tabela_Naped.at(i).tyl) + " " +
+                                    Tabela_Naped.last().p.imie);
         }
         msgBox.setText("Wczytano napędy.");
     }else{
@@ -141,6 +159,12 @@ void MainWindow::on_modyfikujNaped_clicked()
                                                QString::number(ui->wartoscPrzod->value()) + " " +
                                                QString::number(ui->wartoscTyl->value()) + " " +
                                                ui->napedPracownicy->currentText());
+
+        ui->AutaNaped->setItemText(ui->listaPracownikow->currentRow(),ui->napedNaped->text() + " " +
+                                               QString::number(ui->wartoscPrzod->value()) + " " +
+                                               QString::number(ui->wartoscTyl->value()) + " " +
+                                               ui->napedPracownicy->currentText());
+
         Tabela_Naped.replace(ui->listaNaped->currentRow(),
                                    new Naped(ui->napedNaped->text(),
                                              ui->wartoscPrzod->value(),

@@ -6,7 +6,7 @@
 class Kola{
 public:
 
-    QString material;
+    QString kolaMaterial;
     float wielkosc;
     Pracownik p;
     Kola();
@@ -14,6 +14,10 @@ public:
     Kola(Kola *k);
     friend bool zapisz_kola();
     friend bool wczytaj_kopa();
+    friend QDataStream &operator <<(QDataStream &out, Kola const &k);
+    friend QDataStream &operator >>(QDataStream &in, Kola &k);
 };
+
+extern QVector<Kola> Tabela_Kola;
 
 #endif // KOLA_H

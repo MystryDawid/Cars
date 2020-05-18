@@ -3,18 +3,21 @@
 #include "QString"
 #include "Classes/Pracownik/pracownik.h"
 
-class silnik{
+class Silnik{
 public:
     QString typSilnika;
     int mocSilnika;
     Pracownik p;
-    silnik();
-    silnik(QString typSilnika, int mocSilnika, Pracownik p);
-    silnik(silnik *s);
+    Silnik();
+    Silnik(QString typSilnika, int mocSilnika, Pracownik p);
+    Silnik(Silnik *s);
     friend bool zapisz_silniki();
     friend bool wczytaj_silniki();
+    friend QDataStream &operator <<(QDataStream &out, Silnik const &s);
+    friend QDataStream &operator >>(QDataStream &in, Silnik &s);
 
 };
 
+extern QVector<Silnik> Tabela_Silnik;
 
 #endif // SILNIK_H

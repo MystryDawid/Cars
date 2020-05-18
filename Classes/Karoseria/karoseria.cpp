@@ -7,34 +7,34 @@
 QVector<Karoseria> Tabela_Karoseria;
 
 Karoseria::Karoseria(){
-    this->typ = "";
-    this->material = "";
+    this->karoseriaTyp = "";
+    this->karoseriaMaterial = "";
     this->masa = 0.0;
     this->p = new Pracownik();
 }
 
 Karoseria::Karoseria
 (QString typ, QString material, float masa, Pracownik p){
-    this->typ = typ;
-    this->material = material;
+    this->karoseriaTyp = typ;
+    this->karoseriaMaterial = material;
     this->masa = masa;
     this->p = new Pracownik(p);
 }
 
 Karoseria::Karoseria(Karoseria *k){
-    this->typ = k->typ;
+    this->karoseriaTyp = k->karoseriaTyp;
     this->masa = k->masa;
-    this->material = k->material;
+    this->karoseriaMaterial = k->karoseriaMaterial;
     this->p = k->p;
 }
 
 QDataStream &operator <<(QDataStream &out, Karoseria const &k){
-    out << k.typ << k.material << k.masa<< k.p;
+    out << k.karoseriaTyp << k.karoseriaMaterial << k.masa<< k.p;
     return out;
 }
 
 QDataStream &operator >>(QDataStream &in, Karoseria &k){
-    in >> k.typ >> k.material >> k.masa >> k.p;
+    in >> k.karoseriaTyp >> k.karoseriaMaterial >> k.masa >> k.p;
     return in;
 }
 
@@ -80,10 +80,15 @@ void MainWindow::on_dodajTypKaroserii_clicked()
                                     ui->masa->value(),
                                     Tabela_Pracownikow.at(ui->karoseriePracownicy->currentIndex())
                                     ));
-        ui->listaTypyKaroserii->addItem(Tabela_Karoseria.last().typ + " " +
-                                        Tabela_Karoseria.last().material + " " +
+        ui->listaTypyKaroserii->addItem(Tabela_Karoseria.last().karoseriaTyp + " " +
+                                        Tabela_Karoseria.last().karoseriaMaterial + " " +
                                         QString::number(Tabela_Karoseria.last().masa) + " " +
                                         Tabela_Karoseria.last().p.imie);
+        ui->AutaKaroseria->addItem(Tabela_Karoseria.last().karoseriaTyp + " " +
+                                        Tabela_Karoseria.last().karoseriaMaterial + " " +
+                                        QString::number(Tabela_Karoseria.last().masa) + " " +
+                                        Tabela_Karoseria.last().p.imie);
+
         msgBox.setText("Dodano karoserię.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -98,6 +103,7 @@ void MainWindow::on_usunTypKaroserii_clicked()
     if(row != -1){
         Tabela_Karoseria.remove(row);
         ui->listaTypyKaroserii->takeItem(row);
+        ui->AutaKaroseria->removeItem(row);
         msgBox.setText("Usunięto karoserie.");
     }else{
         msgBox.setText("Usunięcie karoserii nie powiodło się.");
@@ -121,9 +127,15 @@ void MainWindow::on_wczytajTypyKaroserii_clicked()
     QMessageBox msgBox;
     if(wczytaj_typy_karoserii()){
         ui->listaTypyKaroserii->clear();
+        ui->AutaKaroseria->clear();
         for (int i = 0;i < Tabela_Karoseria.length(); i++) {
-            ui->listaTypyKaroserii->addItem(Tabela_Karoseria.at(i).typ + " " +
-                                            Tabela_Karoseria.at(i).material + " " +
+            ui->listaTypyKaroserii->addItem(Tabela_Karoseria.at(i).karoseriaTyp + " " +
+                                            Tabela_Karoseria.at(i).karoseriaMaterial + " " +
+                                            QString::number(Tabela_Karoseria.at(i).masa) + " " +
+                                            Tabela_Karoseria.at(i).p.imie);
+
+            ui->AutaKaroseria->addItem(Tabela_Karoseria.at(i).karoseriaTyp + " " +
+                                            Tabela_Karoseria.at(i).karoseriaMaterial + " " +
                                             QString::number(Tabela_Karoseria.at(i).masa) + " " +
                                             Tabela_Karoseria.at(i).p.imie);
         }
@@ -138,9 +150,9 @@ void MainWindow::on_wczytajTypyKaroserii_clicked()
 void MainWindow::on_listaTypyKaroserii_clicked()
 {
     Karoseria tmp = new Karoseria(Tabela_Karoseria.at(ui->listaTypyKaroserii->currentIndex().row()));
-    ui->typTypKaroserii->setText(tmp.typ);
+    ui->typTypKaroserii->setText(tmp.karoseriaTyp);
     ui->masa->setValue(tmp.masa);
-    ui->material->setText(tmp.material);
+    ui->material->setText(tmp.karoseriaMaterial);
 }
 
 void MainWindow::on_modyfikujTypKaroserii_clicked()
@@ -153,6 +165,11 @@ void MainWindow::on_modyfikujTypKaroserii_clicked()
                                                        ui->material->text() + " " +
                                                        QString::number(ui->masa->value()) + " " +
                                                        ui->karoseriePracownicy->currentText());
+        ui->AutaKaroseria->setItemText(ui->listaPracownikow->currentRow(), ui->typTypKaroserii->text() + " " +
+                                                       ui->material->text() + " " +
+                                                       QString::number(ui->masa->value()) + " " +
+                                                       ui->karoseriePracownicy->currentText());
+
         Tabela_Karoseria.replace(ui->listaTypyKaroserii->currentRow(),
                                    new Karoseria(
                                      ui->typTypKaroserii->text(),

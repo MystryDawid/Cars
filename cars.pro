@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Classes/Auto/auto.cpp \
     Classes/Karoseria/karoseria.cpp \
     Classes/Kola/kola.cpp \
     Classes/Naped/naped.cpp \
@@ -26,11 +27,13 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    Classes/Auto/auto.h \
     Classes/Karoseria/karoseria.h \
     Classes/Kola/kola.h \
     Classes/Naped/naped.h \
     Classes/Pracownik/pracownik.h \
     Classes/Silnik/silnik.h \
+    Classes/auto.h \
     mainwindow.h
 
 FORMS += \
@@ -50,6 +53,7 @@ DISTFILES += \
     .idea/workspace.xml
 
 SUBDIRS += \
+    Factory.pro \
     Factory.pro \
     Factory.pro \
     Factory.pro \

@@ -8,21 +8,31 @@
 QVector<Kola> Tabela_Kola;
 
 Kola::Kola(){
-    this->material = "";
+    this->kolaMaterial = "";
     this->wielkosc = 20;
     this->p = new Pracownik();
 }
 
 Kola::Kola(QString material, float wielkosc, Pracownik p){
-    this->material = material;
+    this->kolaMaterial = material;
     this->wielkosc = wielkosc;
     this->p = new Pracownik(p);
 }
 
 Kola::Kola(Kola *k){
-    this->material = k->material;
+    this->kolaMaterial = k->kolaMaterial;
     this->wielkosc = k->wielkosc;
     this->p = k->p;
+}
+
+QDataStream &operator <<(QDataStream &out, Kola const &k){
+    out << k.kolaMaterial << k.wielkosc << k.p;
+    return out;
+}
+
+QDataStream &operator >>(QDataStream &in, Kola &k){
+    in >> k.kolaMaterial >> k.wielkosc >> k.p;
+    return in;
 }
 
 bool zapisz_kola(){
@@ -32,9 +42,7 @@ bool zapisz_kola(){
     file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
     for(int i = 0; i < Tabela_Kola.length(); i++){
-         out << Tabela_Kola.at(i).material <<
-                Tabela_Kola.at(i).wielkosc <<
-                Tabela_Kola.at(i).p;
+         out << Tabela_Kola.at(i);
     }
     file.close();
     return true;
@@ -48,7 +56,7 @@ bool wczytaj_kopa(){
     Tabela_Kola.clear();
     while(!in.atEnd()){
        Kola k = new Kola();
-       in >> k.material >> k.wielkosc >> k.p;
+       in >> k;
        Tabela_Kola.append(k);
     }
     file.close();
@@ -72,7 +80,11 @@ void MainWindow::on_wczytajKola_clicked()
     if(wczytaj_kopa()){
         ui->listaKol->clear();
         for (int i = 0;i < Tabela_Kola.length(); i++) {
-            ui->listaKol->addItem(Tabela_Kola.at(i).material + " " +
+            ui->listaKol->addItem(Tabela_Kola.at(i).kolaMaterial + " " +
+                                  QString::number(Tabela_Kola.at(i).wielkosc) + " " +
+                                  Tabela_Kola.at(i).p.imie);
+
+            ui->AutaKola->addItem(Tabela_Kola.at(i).kolaMaterial + " " +
                                   QString::number(Tabela_Kola.at(i).wielkosc) + " " +
                                   Tabela_Kola.at(i).p.imie);
         }
@@ -91,7 +103,11 @@ void MainWindow::on_dodajKola_clicked()
         Tabela_Kola.append(Kola(ui->KoloMaterial->text(),
                                   ui->wielkoscKola->value(),
                                     Tabela_Pracownikow.at(ui->kolaPracownicy->currentIndex())));
-        ui->listaKol->addItem(Tabela_Kola.last().material + " " +
+        ui->listaKol->addItem(Tabela_Kola.last().kolaMaterial + " " +
+                              QString::number(Tabela_Kola.last().wielkosc) + " " +
+                              Tabela_Kola.last().p.imie);
+
+        ui->AutaKola->addItem(Tabela_Kola.last().kolaMaterial + " " +
                               QString::number(Tabela_Kola.last().wielkosc) + " " +
                               Tabela_Kola.last().p.imie);
         msgBox.setText("Dodano koła.");
@@ -108,6 +124,11 @@ void MainWindow::on_modyfikujKola_clicked()
         ui->listaKol->currentItem()->setText(ui->KoloMaterial->text() + " " +
                                              QString::number(ui->wielkoscKola->value()) + " " +
                                              ui->kolaPracownicy->currentText());
+
+        ui->AutaKola->setItemText(ui->listaPracownikow->currentRow(),ui->KoloMaterial->text() + " " +
+                                             QString::number(ui->wielkoscKola->value()) + " " +
+                                             ui->kolaPracownicy->currentText());
+
         Tabela_Kola.replace(ui->listaKol->currentRow(),
                                    new Kola(ui->KoloMaterial->text(),
                                             ui->wielkoscKola->value(),
@@ -126,6 +147,7 @@ void MainWindow::on_usunKola_clicked()
     if(row != -1){
         Tabela_Kola.remove(row);
         ui->listaKol->takeItem(row);
+        ui->AutaKola->removeItem(row);
         msgBox.setText("Usunięto napęd.");
     }else{
         msgBox.setText("Usunięcie napędu nie powiodło się.");
@@ -140,7 +162,7 @@ void MainWindow::on_wielkoscKola_valueChanged(int value)
 
 void MainWindow::on_listaKol_clicked(){
     Kola tmp = new Kola(Tabela_Kola.at(ui->listaKol->currentIndex().row()));
-    ui->KoloMaterial->setText(tmp.material);
+    ui->KoloMaterial->setText(tmp.kolaMaterial);
     ui->wielkoscKola->setValue(tmp.wielkosc);
 }
 

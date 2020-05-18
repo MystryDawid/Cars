@@ -80,11 +80,18 @@ void MainWindow::on_dodajPracownika_clicked()
                     Pracownik(ui->imie->text(),
                               ui->nazwisko->text(),
                               ui->staz->value()));
-        ui->listaPracownikow->addItem(Tabela_Pracownikow.last().imie);
-        ui->karoseriePracownicy->addItem(Tabela_Pracownikow.last().imie);
-        ui->kolaPracownicy->addItem(Tabela_Pracownikow.last().imie);
-        ui->napedPracownicy->addItem(Tabela_Pracownikow.last().imie);
-        ui->silnikPracownicy->addItem(Tabela_Pracownikow.last().imie);
+        ui->listaPracownikow->addItem(Tabela_Pracownikow.last().imie + " " +
+                                      Tabela_Pracownikow.last().nazwisko);
+        ui->karoseriePracownicy->addItem(Tabela_Pracownikow.last().imie + " " +
+                                         Tabela_Pracownikow.last().nazwisko);
+        ui->kolaPracownicy->addItem(Tabela_Pracownikow.last().imie + " " +
+                                    Tabela_Pracownikow.last().nazwisko);
+        ui->napedPracownicy->addItem(Tabela_Pracownikow.last().imie + " " +
+                                     Tabela_Pracownikow.last().nazwisko);
+        ui->silnikPracownicy->addItem(Tabela_Pracownikow.last().imie + " " +
+                                      Tabela_Pracownikow.last().nazwisko);
+        ui->autoPracownicy->addItem(Tabela_Pracownikow.last().imie + " " +
+                                    Tabela_Pracownikow.last().nazwisko);
         msgBox.setText("Dodano pracownika.");
     }else{
         msgBox.setText("Proszę wypełnić wszystkie pola.");
@@ -103,6 +110,7 @@ void MainWindow::on_usunPracownika_clicked()
         ui->kolaPracownicy->removeItem(row);
         ui->napedPracownicy->removeItem(row);
         ui->silnikPracownicy->removeItem(row);
+        ui->autoPracownicy->removeItem(row);
         msgBox.setText("Usunięto pracownika.");
     }else{
         msgBox.setText("Usunięcie pracownika nie powiodło się.");
@@ -129,12 +137,20 @@ void MainWindow::on_wczytaj_pracownikow_clicked()
         ui->karoseriePracownicy->clear();
         ui->kolaPracownicy->clear();
         ui->silnikPracownicy->clear();
+        ui->autoPracownicy->clear();
         for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
-            ui->listaPracownikow->addItem(Tabela_Pracownikow.at(i).imie);
-            ui->karoseriePracownicy->addItem(Tabela_Pracownikow.at(i).imie);
-            ui->kolaPracownicy->addItem(Tabela_Pracownikow.at(i).imie);
-            ui->napedPracownicy->addItem(Tabela_Pracownikow.at(i).imie);
-            ui->silnikPracownicy->addItem(Tabela_Pracownikow.at(i).imie);
+            ui->listaPracownikow->addItem(Tabela_Pracownikow.at(i).imie + " " +
+                                          Tabela_Pracownikow.at(i).nazwisko);
+            ui->karoseriePracownicy->addItem(Tabela_Pracownikow.at(i).imie + " " +
+                                             Tabela_Pracownikow.at(i).nazwisko);
+            ui->kolaPracownicy->addItem(Tabela_Pracownikow.at(i).imie + " " +
+                                        Tabela_Pracownikow.at(i).nazwisko);
+            ui->napedPracownicy->addItem(Tabela_Pracownikow.at(i).imie + " " +
+                                         Tabela_Pracownikow.at(i).nazwisko);
+            ui->silnikPracownicy->addItem(Tabela_Pracownikow.at(i).imie + " " +
+                                          Tabela_Pracownikow.at(i).nazwisko);
+            ui->autoPracownicy->addItem(Tabela_Pracownikow.at(i).imie + " " +
+                                        Tabela_Pracownikow.at(i).nazwisko);
         }
         msgBox.setText("Wczytano pracowników.");
     }else{
@@ -158,11 +174,18 @@ void MainWindow::on_modyfikuj_clicked()
     if(!ui->imie->text().isEmpty() && !ui->nazwisko->text().isEmpty()
             && !ui->staz->text().isEmpty()){
         QString imie = ui->imie->text();
-        ui->listaPracownikow->currentItem()->setText(imie);
-        ui->karoseriePracownicy->setItemText(ui->listaPracownikow->currentRow(),imie);
-        ui->kolaPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie);
-        ui->napedPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie);
-        ui->silnikPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie);
+        ui->listaPracownikow->currentItem()->setText(imie + " " +
+                                                     ui->nazwisko->text());
+        ui->karoseriePracownicy->setItemText(ui->listaPracownikow->currentRow(),imie + " " +
+                                             ui->nazwisko->text());
+        ui->kolaPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie + " " +
+                                        ui->nazwisko->text());
+        ui->napedPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie + " " +
+                                         ui->nazwisko->text());
+        ui->silnikPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie + " " +
+                                          ui->nazwisko->text());
+        ui->autoPracownicy->setItemText(ui->listaPracownikow->currentRow(),imie + " " +
+                                        ui->nazwisko->text());
         Tabela_Pracownikow.replace(ui->listaPracownikow->currentRow(),
                                    new Pracownik(imie,
                                                  ui->nazwisko->text(),

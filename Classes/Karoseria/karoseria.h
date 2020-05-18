@@ -6,7 +6,7 @@
 class Karoseria{
 
 public:
-    QString typ, material;
+    QString karoseriaTyp, karoseriaMaterial;
     float masa;
     Pracownik p;
     Karoseria(QString typ, QString material, float masa, Pracownik p);
@@ -19,6 +19,6 @@ public:
 
 };
 
-
+extern QVector<Karoseria> Tabela_Karoseria;
 
 #endif // KAROSERIA_H
