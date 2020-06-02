@@ -1078,7 +1078,7 @@ color:red;
        </rect>
       </property>
       <property name="text">
-       <string>Wczytaj typy karoserii</string>
+       <string>Wczytaj NAPĘD</string>
       </property>
      </widget>
      <widget class="QPushButton" name="zapiszNaped">
@@ -1328,7 +1328,7 @@ color:red;
        </rect>
       </property>
       <property name="text">
-       <string>Wczytaj typy karoserii</string>
+       <string>Wczytaj KOŁA</string>
       </property>
      </widget>
      <widget class="QListWidget" name="listaKol">
@@ -1581,7 +1581,7 @@ color:red;
        </rect>
       </property>
       <property name="text">
-       <string>Wczytaj typy karoserii</string>
+       <string>Wczytaj SILNIKI</string>
       </property>
      </widget>
      <widget class="QListWidget" name="listaSilnikow">
