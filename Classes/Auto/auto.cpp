@@ -43,7 +43,7 @@ QDataStream &operator >>(QDataStream &in, Auto &a){
 }
 
 bool zapisz_auta(){
-    if(Tabela_Aut.isEmpty()) return 0;
+    if(Tabela_Aut.size() == 0) return 0;
     QString plik = "./auta.dat";
     QFile file(plik);
     file.open(QIODevice::WriteOnly);

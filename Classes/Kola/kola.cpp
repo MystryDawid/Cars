@@ -37,7 +37,8 @@ QDataStream &operator >>(QDataStream &in, Kola &k){
 
 
 bool zapisz_kola(){
-    if(Tabela_Kola.isEmpty()) return 0;
+
+    if(Tabela_Kola.size() == 0) return 0;
     QString plik = "./kola.dat";
     QFile file(plik);
     file.open(QIODevice::WriteOnly);

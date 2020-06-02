@@ -41,7 +41,7 @@ QDataStream &operator >>(QDataStream &in, Silnik &s){
 }
 
 bool zapisz_silniki(){
-    if(Tabela_Silnik.isEmpty()) return 0;
+    if(Tabela_Silnik.size() == 0) return 0;
     QString plik = "./silniki.dat";
     QFile file(plik);
     file.open(QIODevice::WriteOnly);

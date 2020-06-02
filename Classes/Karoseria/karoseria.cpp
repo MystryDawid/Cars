@@ -39,7 +39,7 @@ QDataStream &operator >>(QDataStream &in, Karoseria &k){
 }
 
 bool zapisz_typy_karoserii(){
-    if(Tabela_Karoseria.isEmpty()) return 0;
+    if(Tabela_Karoseria.size() == 0) return 0;
     QString plik = "./karoserie.dat";
     QFile file(plik);
     file.open(QIODevice::WriteOnly);

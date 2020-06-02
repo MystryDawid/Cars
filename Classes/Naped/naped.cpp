@@ -5,9 +5,6 @@
 #include "QMessageBox"
 #include "iostream"
 
-
-using namespace std;
-
 QVector<Naped> Tabela_Naped;
 
 Naped::Naped(QString naped,int przod, int tyl, Pracownik p){
@@ -42,18 +39,20 @@ QDataStream &operator >>(QDataStream &in, Naped &n){
 }
 
 bool zapisz_naped(){
-    if(Tabela_Naped.isEmpty()) return 0;
+
+    if(Tabela_Naped.size() == 0) return 0;
     QString plik = "./napedy.dat";
     QFile file(plik);
     file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
     for(int i = 0; i < Tabela_Naped.length(); i++){
-         out << Tabela_Naped.at(i);
+         //out << Tabela_Naped.at(i);
+         out << Tabela_Naped.at(i).naped << Tabela_Naped.at(i).przod << Tabela_Naped.at(i).tyl << Tabela_Naped.at(i).p;
     }
-
     return true;
 
 };
+
 
 bool wczytaj_naped(){
     QString plik = "./napedy.dat";
@@ -72,14 +71,12 @@ bool wczytaj_naped(){
 void MainWindow::on_dodajNaped_clicked()
 {
     QMessageBox msgBox;
-
-    if(!ui->napedNaped->text().isEmpty() &&
+    if(!ui->napedNapedTyp->text().isEmpty() &&
             ui->napedPracownicy->count() > 0){
 
-        QString text = ui->napedNaped->text();
+        QString text = ui->napedNapedTyp->text();
         int przod = ui->wartoscPrzod->value();
         int tyl = ui->wartoscTyl->value();
-        QString imie = Tabela_Naped.last().p.imie;
 
         Tabela_Naped.append(Naped(text,
                                   przod,
@@ -89,12 +86,12 @@ void MainWindow::on_dodajNaped_clicked()
         ui->listaNaped->addItem(text + " " +
                                 QString::number(przod) + " " +
                                 QString::number(tyl) + " " +
-                                imie);
+                                Tabela_Naped.last().p.imie);
 
         ui->AutaNaped->addItem(text + " " +
                                 QString::number(przod) + " " +
                                 QString::number(tyl) + " " +
-                                imie);
+                                Tabela_Naped.last().p.imie);
 
         msgBox.setText("Dodano napęd.");
     }else{
@@ -167,7 +164,7 @@ void MainWindow::on_wczytajNaped_clicked()
 void MainWindow::on_listaNaped_clicked()
 {
     Naped tmp = Tabela_Naped.at(ui->listaNaped->currentIndex().row());
-    ui->napedNaped->setText(tmp.naped);
+    ui->napedNapedTyp->setText(tmp.naped);
     ui->wartoscPrzod->setValue(tmp.przod);
     ui->wartoscTyl->setValue(tmp.tyl);
 }
@@ -176,11 +173,11 @@ void MainWindow::on_modyfikujNaped_clicked()
 {
     QMessageBox msgBox;
 
-    if(!ui->napedNaped->text().isEmpty()){
+    if(!ui->napedNapedTyp->text().isEmpty()){
 
         int przod = ui->wartoscPrzod->value();
         int tyl = ui->wartoscTyl->value();
-        QString naped = ui->napedNaped->text();
+        QString naped = ui->napedNapedTyp->text();
         QString napedPracownik = ui->napedPracownicy->currentText();
 
         ui->listaNaped->currentItem()->setText(naped + " " +

@@ -42,7 +42,7 @@ Pracownik::Pracownik(Pracownik *p){
 }
 
 bool zapisz_pracownikow(){
-    if(Tabela_Pracownikow.isEmpty()) return 0;
+    if(Tabela_Pracownikow.size() == 0) return 0;
     QString plik = "./pracownicy.dat";
     QFile file(plik);
     file.open(QIODevice::WriteOnly);

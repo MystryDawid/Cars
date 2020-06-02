@@ -1094,7 +1094,7 @@ color:red;
        <string>Zapisz zmiany</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="napedNaped">
+     <widget class="QLineEdit" name="napedNapedTyp">
       <property name="geometry">
        <rect>
         <x>410</x>
@@ -1281,7 +1281,7 @@ color:red;
      <zorder>wczytajNaped</zorder>
      <zorder>zapiszNaped</zorder>
      <zorder>label_10</zorder>
-     <zorder>napedNaped</zorder>
+     <zorder>napedNapedTyp</zorder>
      <zorder>label_11</zorder>
      <zorder>label_12</zorder>
      <zorder>lcdNumberPrzod</zorder>
