@@ -149,27 +149,14 @@ font-size:15px;;
      <widget class="QPushButton" name="goToWybierzAuto">
       <property name="geometry">
        <rect>
-        <x>350</x>
+        <x>50</x>
         <y>50</y>
-        <width>241</width>
+        <width>541</width>
         <height>171</height>
        </rect>
       </property>
       <property name="text">
        <string>STWÓRZ SAMOCHÓD</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="goToStworzAuto">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>50</y>
-        <width>241</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>WYBIERZ SAMOCHÓD</string>
       </property>
      </widget>
      <widget class="QPushButton" name="goToDodajCzesci">
