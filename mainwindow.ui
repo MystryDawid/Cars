@@ -61,8 +61,8 @@ red: #ff003c;
 }
 
 QWidget{
-background-color:#fcee09;
-color: #050a0e;
+background-color:#050a0e;
+color: #fcee09;
 font-family:Curier;
 }
 
@@ -83,13 +83,13 @@ color:#00f0ff;
 }
 
 QLineEdit{
- border: 2px solid #050a0e;
+ border: 2px solid #fcee09;
 color: #00f0ff;
 font-size:15px;;
 }
 
 QSpinBox, QDoubleSpinBox{
- border: 2px solid #050a0e;
+ border: 2px solid #fcee09;
   font-size:15px;
 }
 QLabel{
@@ -102,9 +102,9 @@ background-color:#00f0ff;
 }
 
 QPushButton{
-  border: 2px solid #050a0e;
-  background-color:  #fcee09;
-  color: #050a0e;
+  border: 2px solid #fcee09;
+  background-color:  #050a0e;
+  color:  #fcee09;
   font-size:15px;
   text-transform: uppercase;
   font-weight:bold;
@@ -115,7 +115,7 @@ QPushButton:hover{
 }
 
 QListWidget{
- border: 2px solid #050a0e;
+ border: 2px solid #fcee09;
  color:  #00f0ff;
 font-size:15px;;
 }</string>
