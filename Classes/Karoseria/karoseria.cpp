@@ -183,7 +183,16 @@ void MainWindow::on_modyfikujTypKaroserii_clicked()
         QString typKaroserii = ui->typTypKaroserii->text();
         QString material = ui->material->text();
         int masa = ui->masa->value();
-        QString karoseriaPracownika = ui->karoseriePracownicy->currentText();
+
+        Tabela_Karoseria.replace(ui->listaTypyKaroserii->currentRow(),
+                                   Karoseria(typKaroserii, material,
+                                     masa,
+                                     Tabela_Pracownikow.at(ui->karoseriePracownicy->currentIndex())));
+
+        QString karoseriaPracownika =
+                Tabela_Pracownikow.at(ui->listaTypyKaroserii->currentRow()).imie;
+
+
 
         ui->listaTypyKaroserii->currentItem()->setText(typKaroserii + " " +
                                                        material + " " +
@@ -195,10 +204,7 @@ void MainWindow::on_modyfikujTypKaroserii_clicked()
                     typKaroserii + " " + material + " " +
                     QString::number(masa) + " " + karoseriaPracownika);
 
-        Tabela_Karoseria.replace(ui->listaTypyKaroserii->currentRow(),
-                                   Karoseria(typKaroserii, material,
-                                     masa,
-                                     Tabela_Pracownikow.at(ui->karoseriePracownicy->currentIndex())));
+
 
         msgBox.setText("Zmodyfikowano karoserię.");
     }else{
