@@ -178,7 +178,14 @@ void MainWindow::on_modyfikujNaped_clicked()
         int przod = ui->wartoscPrzod->value();
         int tyl = ui->wartoscTyl->value();
         QString naped = ui->napedNapedTyp->text();
-        QString napedPracownik = ui->napedPracownicy->currentText();
+
+        Tabela_Naped.replace(ui->listaNaped->currentRow(),
+                                   Naped(naped,
+                                         przod,
+                                         tyl,
+                                         Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex())));
+
+        QString napedPracownik = Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex()).imie;
 
         ui->listaNaped->currentItem()->setText(naped + " " +
                                                QString::number(przod) + " " +
@@ -190,11 +197,7 @@ void MainWindow::on_modyfikujNaped_clicked()
                                                QString::number(tyl) + " " +
                                                napedPracownik);
 
-        Tabela_Naped.replace(ui->listaNaped->currentRow(),
-                                   Naped(naped,
-                                         przod,
-                                         tyl,
-                                         Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex())));
+
 
         msgBox.setText("Zmodyfikowano pracownika.");
     }else{

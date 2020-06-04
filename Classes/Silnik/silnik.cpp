@@ -158,7 +158,13 @@ void MainWindow::on_modyfikujSilnik_clicked()
 
         QString silnik = ui->silnikTyp->text();
         int moc = ui->silnikKonie->value();
-        QString silnikPracownik = ui->silnikPracownicy->currentText();
+
+        Tabela_Silnik.replace(ui->listaSilnikow->currentRow(),
+                                   Silnik(silnik,
+                                          moc,
+                                          Tabela_Pracownikow.at(ui->silnikPracownicy->currentIndex())));
+
+        QString silnikPracownik = Tabela_Pracownikow.at(ui->silnikPracownicy->currentIndex()).imie;
 
         ui->listaSilnikow->currentItem()->setText(silnik + " " +
                                                   QString::number(moc) + " " +
@@ -168,10 +174,7 @@ void MainWindow::on_modyfikujSilnik_clicked()
                                     silnik + " " + QString::number(moc) + " " +
                                     silnikPracownik);
 
-        Tabela_Silnik.replace(ui->listaSilnikow->currentRow(),
-                                   Silnik(silnik,
-                                          moc,
-                                          Tabela_Pracownikow.at(ui->silnikPracownicy->currentIndex())));
+
 
         msgBox.setText("Zmodyfikowano silnik.");
     }else{

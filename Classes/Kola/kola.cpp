@@ -136,7 +136,13 @@ void MainWindow::on_modyfikujKola_clicked()
 
         QString koloMaterial = ui->KoloMaterial->text();
         int wielkosc = ui->wielkoscKola->value();
-        QString kolaPracownicy = ui->kolaPracownicy->currentText();
+
+
+        Tabela_Kola.replace(ui->listaKol->currentRow(),
+                                   Kola(koloMaterial, wielkosc,
+                                        Tabela_Pracownikow.at(ui->kolaPracownicy->currentIndex())));
+
+         QString kolaPracownicy = Tabela_Pracownikow.at(ui->kolaPracownicy->currentIndex()).imie;
 
         ui->listaKol->currentItem()->setText(koloMaterial + " " +
                                              QString::number(wielkosc) + " " +
@@ -147,9 +153,7 @@ void MainWindow::on_modyfikujKola_clicked()
                                   QString::number(wielkosc) + " " +
                                   kolaPracownicy);
 
-        Tabela_Kola.replace(ui->listaKol->currentRow(),
-                                   Kola(koloMaterial, wielkosc,
-                                        Tabela_Pracownikow.at(ui->kolaPracownicy->currentIndex())));
+
 
         msgBox.setText("Zmodyfikowano koła.");
     }else{
