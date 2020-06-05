@@ -190,7 +190,7 @@ void MainWindow::on_modyfikujTypKaroserii_clicked()
                                      Tabela_Pracownikow.at(ui->karoseriePracownicy->currentIndex())));
 
         QString karoseriaPracownika =
-                Tabela_Pracownikow.at(ui->listaTypyKaroserii->currentRow()).imie;
+                Tabela_Karoseria.at(ui->listaTypyKaroserii->currentRow()).p.imie;
 
 
 
