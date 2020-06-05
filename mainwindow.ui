@@ -952,7 +952,7 @@ color:red;
        </rect>
       </property>
       <property name="text">
-       <string>PRACOWNIYC</string>
+       <string>PRACOWNICY</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
