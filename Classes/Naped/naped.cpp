@@ -199,9 +199,9 @@ void MainWindow::on_modyfikujNaped_clicked()
 
 
 
-        msgBox.setText("Zmodyfikowano pracownika.");
+        msgBox.setText("Zmodyfikowano napęd.");
     }else{
-        msgBox.setText("Proszę wybrać pracowanika z listy po lewej.");
+        msgBox.setText("Proszę wybrać naped z listy po lewej.");
     }
     msgBox.exec();
 }
