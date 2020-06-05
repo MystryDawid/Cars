@@ -142,7 +142,7 @@ void MainWindow::on_modyfikujKola_clicked()
                                    Kola(koloMaterial, wielkosc,
                                         Tabela_Pracownikow.at(ui->kolaPracownicy->currentIndex())));
 
-         QString kolaPracownicy = Tabela_Pracownikow.at(ui->kolaPracownicy->currentIndex()).imie;
+        QString kolaPracownicy = Tabela_Kola.at(ui->listaKol->currentRow()).p.imie;
 
         ui->listaKol->currentItem()->setText(koloMaterial + " " +
                                              QString::number(wielkosc) + " " +

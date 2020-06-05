@@ -141,6 +141,7 @@ void MainWindow::on_wczytaj_pracownikow_clicked()
         ui->kolaPracownicy->clear();
         ui->silnikPracownicy->clear();
         ui->autoPracownicy->clear();
+        ui->napedPracownicy->clear();
 
         for (int i = 0;i < Tabela_Pracownikow.length(); i++) {
 

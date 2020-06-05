@@ -185,7 +185,7 @@ void MainWindow::on_modyfikujNaped_clicked()
                                          tyl,
                                          Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex())));
 
-        QString napedPracownik = Tabela_Pracownikow.at(ui->napedPracownicy->currentIndex()).imie;
+        QString napedPracownik = Tabela_Naped.at(ui->listaTypyKaroserii->currentRow()).p.imie;
 
         ui->listaNaped->currentItem()->setText(naped + " " +
                                                QString::number(przod) + " " +
