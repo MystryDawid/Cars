@@ -172,9 +172,9 @@ void MainWindow::on_usunKola_clicked()
         ui->listaKol->takeItem(row);
         ui->AutaKola->removeItem(row);
 
-        msgBox.setText("Usunięto napęd.");
+        msgBox.setText("Usunięto koła.");
     }else{
-        msgBox.setText("Usunięcie napędu nie powiodło się.");
+        msgBox.setText("Usunięcie kół nie powiodło się.");
     }
     msgBox.exec();
 }
